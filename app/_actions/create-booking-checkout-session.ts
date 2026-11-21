@@ -16,6 +16,11 @@ const inputSchema = z.object({
 export const createBookingCheckoutSession = actionClient
   .inputSchema(inputSchema)
   .action(async ({ parsedInput: { serviceId, date } }) => {
+    if (process.env.CORTZ_PERSISTENCE_ENABLED === "true") {
+      returnValidationErrors(inputSchema, {
+        _errors: ["O Cortz não utiliza checkout para novos agendamentos."],
+      });
+    }
     if (!process.env.STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY is not set");
     }

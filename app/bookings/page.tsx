@@ -8,7 +8,7 @@ import {
   PageContainer,
   PageSection,
   PageSectionTitle,
-} from "../_components/ui/page";
+} from "../_components/ui/page-layout";
 import BookingItem from "../_components/booking-item";
 
 const BookingsPage = async () => {

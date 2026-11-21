@@ -14,6 +14,11 @@ const inputSchema = z.object({
 export const createBooking = actionClient
   .inputSchema(inputSchema)
   .action(async ({ parsedInput: { serviceId, date } }) => {
+    if (process.env.CORTZ_PERSISTENCE_ENABLED === "true") {
+      returnValidationErrors(inputSchema, {
+        _errors: ["Utilize o novo fluxo de agendamento da barbearia."],
+      });
+    }
     const session = await auth.api.getSession({
       headers: await headers(),
     });

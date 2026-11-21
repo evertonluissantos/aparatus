@@ -20,9 +20,20 @@ model Barbershop {
   address     String
   description String
   imageUrl    String
+  // Null for legacy shops until an explicit publication review; no auto-backfill.
+  slug        String? @unique
+  published   Boolean @default(false)
   phones      String[]
   services    BarbershopService[]
   bookings    Booking[]
+  timeZone    String?
+  professionals Professional[]
+  workingHours WorkingHours[]
+  scheduleBlocks ScheduleBlock[]
+  memberships BarbershopMembership[]
+  bookingCommands BookingCommand[]
+  customers Customer[]
+  pixPayments ManualPixPayment[]
 }
 
 model BarbershopService {
@@ -33,7 +44,13 @@ model BarbershopService {
   barbershopId String
   barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
   priceInCents Int
+  active       Boolean @default(true)
   bookings     Booking[]
+  durationMinutes Int?
+  professionals ProfessionalService[]
+
+  // Composite target for same-establishment service assignments.
+  @@unique([id, barbershopId])
 }
 
 model Booking {
@@ -42,12 +59,110 @@ model Booking {
   service        BarbershopService @relation(fields: [serviceId], references: [id])
   barbershopId   String
   barbershop     Barbershop        @relation(fields: [barbershopId], references: [id])
-  userId         String
-  user           User              @relation(fields: [userId], references: [id])
+  // Existing user references remain intact; guest bookings use a scoped customer.
+  userId         String?
+  user           User?             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  customerId     String?
+  customer       Customer? @relation(fields: [customerId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+  customerNameSnapshot String?
+  serviceNameSnapshot String?
+  professionalNameSnapshot String?
+  createdAt      DateTime? @db.Timestamptz
+  completedAt    DateTime? @db.Timestamptz
   date           DateTime          @db.Timestamptz
   cancelled      Boolean?          @default(false)
   cancelledAt    DateTime?         @db.Timestamptz
   stripeChargeId String?
+  legacyStripeOperations LegacyStripeOperation[]
+  // date remains the persisted start instant. Unknown legacy facts stay null.
+  professionalId String?
+  professional Professional? @relation(fields: [professionalId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+  endsAt DateTime? @db.Timestamptz
+  status BookingStatus?
+  priceInCentsSnapshot Int?
+  durationMinutesSnapshot Int?
+  timeZoneSnapshot String?
+  cancellationReason String?
+  managedByCore Boolean @default(false)
+  command BookingCommand?
+
+  @@index([barbershopId, professionalId, date])
+  @@index([barbershopId, date])
+  @@index([userId, date])
+  @@index([barbershopId, customerId, date])
+  @@unique([id, barbershopId])
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum ScheduleBlockKind {
+  BREAK
+  ABSENCE
+  EXTRAORDINARY
+}
+
+model Professional {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  name String
+  phone String?
+  description String?
+  imageUrl String?
+  active Boolean @default(true)
+  services ProfessionalService[]
+  workingHours WorkingHours[]
+  scheduleBlocks ScheduleBlock[]
+  bookings Booking[]
+
+  @@unique([id, barbershopId])
+  @@index([barbershopId, active])
+}
+
+model ProfessionalService {
+  barbershopId String
+  professionalId String
+  serviceId String
+  professional Professional @relation(fields: [professionalId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+  service BarbershopService @relation(fields: [serviceId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+
+  @@id([barbershopId, professionalId, serviceId])
+  @@index([serviceId, barbershopId])
+}
+
+// Local civil minutes since midnight. Multiple windows express recurring breaks.
+// professionalId = null means establishment hours; otherwise professional hours.
+model WorkingHours {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  professionalId String?
+  professional Professional? @relation(fields: [professionalId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+  weekday Int
+  startMinute Int
+  endMinute Int
+
+  @@index([barbershopId, professionalId, weekday])
+}
+
+// Exact instant interval; null professional applies to the whole establishment.
+model ScheduleBlock {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  professionalId String?
+  professional Professional? @relation(fields: [professionalId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+  startsAt DateTime @db.Timestamptz
+  endsAt DateTime @db.Timestamptz
+  kind ScheduleBlockKind
+  reason String?
+
+  @@index([barbershopId, professionalId, startsAt])
 }
 
 model User {
@@ -61,6 +176,10 @@ model User {
   sessions      Session[]
   accounts      Account[]
   bookings      Booking[]
+  barbershopMemberships BarbershopMembership[]
+  globalAdmin GlobalAdmin?
+  bookingCommands BookingCommand[]
+  customers Customer[]
 
   @@unique([email])
   @@map("user")
@@ -112,4 +231,137 @@ model Verification {
 
   @@map("verification")
   @@index([identifier])
+}
+
+enum BarbershopRole {
+  OWNER
+  MANAGER
+  BARBER
+}
+
+model BarbershopMembership {
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  role BarbershopRole
+  active Boolean @default(false)
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  @@unique([userId, barbershopId])
+  // SQL-only partial unique index on userId WHERE role='OWNER', including inactive.
+  @@index([barbershopId, active, role])
+}
+
+// Separate from tenant roles. No grant/provisioning endpoint in this stage.
+model GlobalAdmin {
+  id String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  active Boolean @default(false)
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz
+  confirmedPixPayments ManualPixPayment[]
+}
+
+// Manual SaaS subscription receipts only. No bank integration or service money.
+model ManualPixPayment {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  competence String
+  amountInCents Int
+  confirmedById String
+  confirmedBy GlobalAdmin @relation(fields: [confirmedById], references: [id], onDelete: Restrict)
+  confirmedAt DateTime @default(now()) @db.Timestamptz
+  coverageStartsAt DateTime @db.Timestamptz
+  coverageEndsAt DateTime @db.Timestamptz
+
+  @@unique([barbershopId, competence])
+  @@index([barbershopId, coverageEndsAt])
+}
+
+model BookingCommand {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  userId String?
+  user User? @relation(fields: [userId], references: [id], onDelete: Restrict)
+  // Alternative pseudonymous actor for future guest idempotency; never a password.
+  guestActorHash String?
+  requestKey String
+  fingerprint String
+  bookingId String @unique
+  booking Booking @relation(fields: [bookingId, barbershopId], references: [id, barbershopId], onDelete: Restrict)
+  createdAt DateTime @default(now()) @db.Timestamptz
+
+  @@unique([barbershopId, userId, requestKey])
+  @@unique([barbershopId, guestActorHash, requestKey])
+  @@unique([bookingId, barbershopId])
+}
+
+model Customer {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  name String
+  // Canonical Brazilian country code + digits; omitted phones are NULL, not "".
+  phoneNormalized String?
+  notes String?
+  userId String?
+  user User? @relation(fields: [userId], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz
+  bookings Booking[]
+
+  @@unique([id, barbershopId])
+  @@unique([barbershopId, phoneNormalized])
+  @@unique([barbershopId, userId])
+}
+
+// Additive inbox for the old service checkout only; not SaaS subscriptions.
+model LegacyStripeEvent {
+  id            String   @id
+  type          String
+  payload       Json
+  status        String   @default("RECEIVED")
+  deliveries    Int      @default(1)
+  receivedAt    DateTime @default(now()) @db.Timestamptz
+  lastReceivedAt DateTime @default(now()) @db.Timestamptz
+  attempts      LegacyStripeAttempt[]
+
+  @@index([status, receivedAt])
+}
+
+model LegacyStripeAttempt {
+  id          String   @id @default(uuid())
+  eventId     String
+  event       LegacyStripeEvent @relation(fields: [eventId], references: [id], onDelete: Restrict)
+  startedAt   DateTime @default(now()) @db.Timestamptz
+  finishedAt  DateTime? @db.Timestamptz
+  outcome     String   @default("STARTED")
+  errorCode   String?
+
+  @@index([eventId, startedAt])
+}
+
+model LegacyStripeOperation {
+  sessionId       String @id
+  paymentIntentId String? @unique
+  chargeId        String? @unique
+  bookingId       String?
+  booking         Booking? @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+  status          String
+  reviewReason    String?
+  paymentStatus   String
+  amountTotal     Int?
+  currency        String?
+  livemode        Boolean
+  createdAt       DateTime @default(now()) @db.Timestamptz
+  updatedAt       DateTime @default(now()) @db.Timestamptz
+
+  @@index([status, updatedAt])
+  @@index([bookingId])
 }

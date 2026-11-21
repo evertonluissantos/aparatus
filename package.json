@@ -3,12 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
+    "test": "node tests/run.mjs",
+    "test:unit": "node tests/run.mjs",
+    "test:schema": "node tests/run.mjs --schema",
+    "test:postgres": "node tests/postgres/run.mjs",
+    "test:neon": "node tests/neon/run.mjs",
+    "test:neon:remote": "node tests/neon/remote-run.mjs",
+    "neon:inspect": "node tests/neon/inspect-readonly.mjs",
+    "neon:inspect:migrations": "node tests/neon/inspect-readonly.mjs --migrations",
+    "neon:migrate:deploy": "node tests/neon/migrate-deploy.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --config prisma.generate.config.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "2.0.46",

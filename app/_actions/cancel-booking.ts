@@ -15,6 +15,13 @@ const inputSchema = z.object({
 export const cancelBooking = actionClient
   .inputSchema(inputSchema)
   .action(async ({ parsedInput: { bookingId } }) => {
+    if (process.env.CORTZ_PERSISTENCE_ENABLED === "true") {
+      returnValidationErrors(inputSchema, {
+        _errors: [
+          "Entre em contato com a barbearia para alterar este agendamento.",
+        ],
+      });
+    }
     const session = await auth.api.getSession({
       headers: await headers(),
     });

@@ -1,3 +1,5 @@
+import { publicBarbershopWhere } from "@/lib/public-barbershop";
+import { OWNER_AUTH_ENABLED } from "@/lib/owner-auth-policy";
 import { streamText, convertToModelMessages, tool, stepCountIs } from "ai";
 import { google } from "@ai-sdk/google";
 import z from "zod";
@@ -80,6 +82,7 @@ export const POST = async (request: Request) => {
         execute: async ({ name }) => {
           if (!name?.trim()) {
             const barbershops = await prisma.barbershop.findMany({
+              where: publicBarbershopWhere(OWNER_AUTH_ENABLED),
               include: {
                 services: true,
               },
@@ -97,6 +100,7 @@ export const POST = async (request: Request) => {
           }
           const barbershops = await prisma.barbershop.findMany({
             where: {
+              ...publicBarbershopWhere(OWNER_AUTH_ENABLED),
               name: {
                 contains: name,
                 mode: "insensitive",

@@ -1,3 +1,5 @@
+import { publicBarbershopWhere } from "@/lib/public-barbershop";
+import { OWNER_AUTH_ENABLED } from "@/lib/owner-auth-policy";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -13,6 +15,7 @@ const BarbershopPage = async (props: PageProps<"/barbershops/[id]">) => {
   const barbershop = await prisma.barbershop.findUnique({
     where: {
       id,
+      ...publicBarbershopWhere(OWNER_AUTH_ENABLED),
     },
     include: {
       services: true,
@@ -52,7 +55,7 @@ const BarbershopPage = async (props: PageProps<"/barbershops/[id]">) => {
       </div>
 
       {/* Container Principal */}
-      <div className="bg-background w-full flex-1 rounded-tl-3xl rounded-tr-3xl">
+      <div className="bg-background relative z-10 -mt-6 w-full flex-1 rounded-tl-3xl rounded-tr-3xl">
         {/* Informações da Barbearia */}
         <div className="flex w-full items-center gap-1.5 px-5 pt-6 pb-0">
           <div className="flex flex-col items-start gap-1">

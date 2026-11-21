@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "authorizers": [
+    {
+      "keyId": "ep-odd-recipe-b69bpw0c",
+      "publicKeyPem": null,
+      "organizationId": "org-plain-frog-58714601",
+      "allowedTestProjectIds": ["orange-rice-48468127"],
+      "forbiddenProjectIds": ["sparkling-union-52245638"]
+    }
+  ]
+}

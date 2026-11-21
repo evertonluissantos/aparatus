@@ -1,60 +1,28 @@
-import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
+import { receiveLegacyStripeEvent } from "@/lib/legacy-stripe/process-event";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export const POST = async (request: Request) => {
   if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
-    return NextResponse.error();
+    return NextResponse.json({ error: "Webhook unavailable" }, { status: 503 });
   }
   const signature = request.headers.get("stripe-signature");
   if (!signature) {
-    return NextResponse.error();
+    return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
   const text = await request.text();
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-  const event = stripe.webhooks.constructEvent(
-    text,
-    signature,
-    process.env.STRIPE_WEBHOOK_SECRET,
-  );
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
-    const date = session.metadata?.date
-      ? new Date(session.metadata.date)
-      : null;
-    const serviceId = session.metadata?.serviceId;
-    const barbershopId = session.metadata?.barbershopId;
-    const userId = session.metadata?.userId;
-    if (!date || !serviceId || !barbershopId || !userId) {
-      return NextResponse.error();
-    }
-
-    // Retrieve session with expanded payment_intent to get chargeId
-    const expandedSession = await stripe.checkout.sessions.retrieve(
-      session.id,
-      {
-        expand: ["payment_intent"],
-      },
-    );
-
-    // Extract chargeId from payment_intent
-    const paymentIntent = expandedSession.payment_intent as Stripe.PaymentIntent;
-    const chargeId =
-      typeof paymentIntent?.latest_charge === "string"
-        ? paymentIntent.latest_charge
-        : paymentIntent?.latest_charge?.id;
-
-    await prisma.booking.create({
-      data: {
-        barbershopId,
-        serviceId,
-        date,
-        userId,
-        stripeChargeId: chargeId || null,
-      },
-    });
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(text, signature, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
-  revalidatePath("/bookings");
-  return NextResponse.json({ received: true });
+  try {
+    const status = await receiveLegacyStripeEvent(event, stripe);
+    return NextResponse.json({ received: true, status });
+  } catch {
+    // No payload, provider errors or credentials in logs/responses. Retry is safe.
+    return NextResponse.json({ error: "Processing pending" }, { status: 503 });
+  }
 };

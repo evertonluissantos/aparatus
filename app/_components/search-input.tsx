@@ -6,14 +6,18 @@ import { FormEvent, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-const SearchInput = () => {
+const SearchInput = ({
+  searchPath = "/barbershops",
+}: {
+  searchPath?: string;
+}) => {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!search.trim()) return;
-    router.push(`/barbershops?search=${encodeURIComponent(search)}`);
+    router.push(`${searchPath}?search=${encodeURIComponent(search)}`);
   };
 
   return (

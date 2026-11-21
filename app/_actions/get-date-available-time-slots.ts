@@ -1,5 +1,7 @@
 "use server";
 
+import { OWNER_AUTH_ENABLED } from "@/lib/owner-auth-policy";
+
 import { actionClient } from "@/lib/action-client";
 import { prisma } from "@/lib/prisma";
 import z from "zod";
@@ -38,6 +40,7 @@ const TIME_SLOTS = [
 export const getDateAvailableTimeSlots = actionClient
   .inputSchema(inputSchema)
   .action(async ({ parsedInput: { barbershopId, date } }) => {
+    if (OWNER_AUTH_ENABLED) throw new Error("LEGACY_AVAILABILITY_DISABLED");
     const session = await auth.api.getSession({
       headers: await headers(),
     });

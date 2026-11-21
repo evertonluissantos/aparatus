@@ -1,12 +1,16 @@
 import { Eye, Footprints, Scissors, Sparkles, User, Waves } from "lucide-react";
 import Link from "next/link";
-import { PageSectionScroller } from "./ui/page";
+import { PageSectionScroller } from "./ui/page-layout";
 
-const QuickSearchButtons = () => {
+const QuickSearchButtons = ({
+  searchPath = "/barbershops",
+}: {
+  searchPath?: string;
+}) => {
   return (
     <PageSectionScroller>
       <Link
-        href="/barbershops?search=cabelo"
+        href={`${searchPath}?search=cabelo`}
         className="border-border bg-card-background flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2"
       >
         <Scissors className="size-4" />
@@ -14,7 +18,7 @@ const QuickSearchButtons = () => {
       </Link>
 
       <Link
-        href="/barbershops?search=barba"
+        href={`${searchPath}?search=barba`}
         className="border-border bg-card-background flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2"
       >
         <User className="size-4" />
@@ -22,7 +26,7 @@ const QuickSearchButtons = () => {
       </Link>
 
       <Link
-        href="/barbershops?search=acabamento"
+        href={`${searchPath}?search=acabamento`}
         className="border-border bg-card-background flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2"
       >
         <Sparkles className="size-4" />
@@ -32,7 +36,7 @@ const QuickSearchButtons = () => {
       </Link>
 
       <Link
-        href="/barbershops?search=sobrancelha"
+        href={`${searchPath}?search=sobrancelha`}
         className="border-border bg-card-background flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2"
       >
         <Eye className="size-4" />
@@ -42,7 +46,7 @@ const QuickSearchButtons = () => {
       </Link>
 
       <Link
-        href="/barbershops?search=pézinho"
+        href={`${searchPath}?search=pézinho`}
         className="border-border bg-card-background flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2"
       >
         <Footprints className="size-4" />
@@ -52,7 +56,7 @@ const QuickSearchButtons = () => {
       </Link>
 
       <Link
-        href="/barbershops?search=progressiva"
+        href={`${searchPath}?search=progressiva`}
         className="border-border bg-card-background flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2"
       >
         <Waves className="size-4" />

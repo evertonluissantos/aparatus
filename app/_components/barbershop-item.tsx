@@ -1,15 +1,16 @@
 import Image from "next/image";
-import { Barbershop } from "@/generated/prisma/client";
 import Link from "next/link";
 
 interface BarbershopItemProps {
-  barbershop: Barbershop;
+  barbershop: { id: string; name: string; address: string; imageUrl: string };
+  href?: string;
 }
 
-const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
+const BarbershopItem = ({ barbershop, href }: BarbershopItemProps) => {
   return (
     <Link
-      href={`/barbershops/${barbershop.id}`}
+      href={href ?? `/barbershops/${barbershop.id}`}
+      prefetch={false}
       className="relative min-h-[200px] min-w-[290px] rounded-xl"
     >
       <div className="absolute top-0 left-0 z-10 h-full w-full rounded-lg bg-linear-to-t from-black to-transparent" />
@@ -17,6 +18,8 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
         src={barbershop.imageUrl}
         alt={barbershop.name}
         fill
+        unoptimized={barbershop.imageUrl.startsWith("data:")}
+        sizes="290px"
         className="rounded-xl object-cover"
       />
       <div className="absolute right-0 bottom-0 left-0 z-20 p-4">

@@ -1,0 +1,9 @@
+{
+  "projectId": "orange-rice-48468127",
+  "organizationId": "org-plain-frog-58714601",
+  "branchId": "br-small-surf-b694suzd",
+  "endpointId": "ep-odd-recipe-b69bpw0c",
+  "hostname": "ep-odd-recipe-b69bpw0c.c-2.sa-east-1.aws.neon.tech",
+  "database": "cortz_test_integration",
+  "role": "cortz_test_runner"
+}
