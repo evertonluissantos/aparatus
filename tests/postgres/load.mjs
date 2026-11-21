@@ -11,6 +11,7 @@ function createLoader(database, userId) {
   const cache = new Map();
   const allowed = new Set([
     "lib/authorization.ts",
+    "lib/global-management.ts",
     "lib/bookings/postgres.ts",
     "lib/bookings/availability.ts",
     "lib/bookings/rules.ts",
@@ -44,7 +45,7 @@ function createLoader(database, userId) {
           if (id === "node:crypto") return { randomUUID };
           if (id === "zod") return zod;
           if (id === "next/headers") return { headers: async () => ({}) };
-          if (id === "@/lib/prisma") return { prisma: database };
+          if (id === "@/lib/prisma" || id === "./prisma") return { prisma: database };
           if (id === "@/lib/auth")
             return {
               auth: {
@@ -75,4 +76,12 @@ export function loadLegacy(database) {
     database,
     "synthetic-unused",
   )("lib/legacy-stripe/process-event.ts");
+}
+
+export function loadGlobalManagement(database, userId) {
+  const load = createLoader(database, userId);
+  return {
+    management: load("lib/global-management.ts"),
+    authorization: load("lib/authorization.ts"),
+  };
 }

@@ -87,7 +87,7 @@ export async function loadShop(
 ): Promise<DemoBarbershop | null> {
   const rows = await sql.$queryRaw<
     Row[]
-  >`SELECT * FROM "Barbershop" WHERE "id" = ${id} AND (${!publicOnly} OR "published" = true)`;
+  >`SELECT * FROM "Barbershop" WHERE "id" = ${id} AND (${!publicOnly} OR ("published" = true AND "suspended"=false))`;
   if (!rows[0]) return null;
   const row = rows[0];
   const services = await sql.$queryRaw<

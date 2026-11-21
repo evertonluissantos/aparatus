@@ -39,6 +39,7 @@ const rolePermissions: Record<MembershipRole, readonly TenantPermission[]> = {
   BARBER: ["services:read", "professionals:read", "schedule:read"],
 };
 const globalPermissions = [
+  "barbershops:manage",
   "subscriptions:read",
   "subscriptions:manage",
   "subscription-payments:confirm",
@@ -76,6 +77,7 @@ type Membership = {
   barbershopId: string;
   role: MembershipRole;
   active: boolean;
+  suspended?: boolean;
 };
 
 // Read all owner links, including inactive ones: suspension must not allow a
@@ -83,13 +85,17 @@ type Membership = {
 export async function requireOwnerPanelAccess() {
   const { userId } = await requireAuthenticatedUser();
   const rows = await prisma.$queryRaw<Membership[]>`
-    SELECT "id", "userId", "barbershopId", "role", "active"
+    SELECT "id", "userId", "barbershopId", "role", "active",
+      (SELECT b."suspended" FROM "Barbershop" b WHERE b."id"="barbershopId") AS "suspended"
     FROM "BarbershopMembership" WHERE "userId" = ${userId} AND "role" = 'OWNER' LIMIT 2`;
   if (
     rows.length > 1 ||
     rows.some(
       (row) =>
-        row.userId !== userId || row.role !== "OWNER" || row.active !== true,
+        row.userId !== userId ||
+        row.role !== "OWNER" ||
+        row.active !== true ||
+        row.suspended === true,
     )
   )
     throw new AuthorizationError("FORBIDDEN");
@@ -103,6 +109,10 @@ async function requirePermissionWithDatabase(
 ) {
   const { userId } = await requireAuthenticatedUser();
   requireId(barbershopId);
+  // Same lock order as operational writers and suspension: shop, then membership.
+  const shops = await database.$queryRaw<{ id: string }[]>`
+    SELECT "id" FROM "Barbershop" WHERE "id"=${barbershopId} AND "suspended"=false FOR SHARE`;
+  if (!shops[0]) throw new AuthorizationError("FORBIDDEN");
   // Parameterized SQL avoids delegates unavailable in the pre-migration client.
   // Missing tables/DB failures propagate: there is deliberately no legacy fallback.
   const rows = await database.$queryRaw<Membership[]>`

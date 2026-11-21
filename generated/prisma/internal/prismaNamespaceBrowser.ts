@@ -69,7 +69,8 @@ export const ModelName = {
   Customer: 'Customer',
   LegacyStripeEvent: 'LegacyStripeEvent',
   LegacyStripeAttempt: 'LegacyStripeAttempt',
-  LegacyStripeOperation: 'LegacyStripeOperation'
+  LegacyStripeOperation: 'LegacyStripeOperation',
+  BarbershopAdministrationChange: 'BarbershopAdministrationChange'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -96,6 +97,7 @@ export const BarbershopScalarFieldEnum = {
   imageUrl: 'imageUrl',
   slug: 'slug',
   published: 'published',
+  suspended: 'suspended',
   phones: 'phones',
   timeZone: 'timeZone'
 } as const
@@ -357,6 +359,18 @@ export const LegacyStripeOperationScalarFieldEnum = {
 } as const
 
 export type LegacyStripeOperationScalarFieldEnum = (typeof LegacyStripeOperationScalarFieldEnum)[keyof typeof LegacyStripeOperationScalarFieldEnum]
+
+
+export const BarbershopAdministrationChangeScalarFieldEnum = {
+  id: 'id',
+  barbershopId: 'barbershopId',
+  globalAdminId: 'globalAdminId',
+  previousSuspended: 'previousSuspended',
+  suspended: 'suspended',
+  createdAt: 'createdAt'
+} as const
+
+export type BarbershopAdministrationChangeScalarFieldEnum = (typeof BarbershopAdministrationChangeScalarFieldEnum)[keyof typeof BarbershopAdministrationChangeScalarFieldEnum]
 
 
 export const SortOrder = {

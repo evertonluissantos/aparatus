@@ -23,6 +23,8 @@ model Barbershop {
   // Null for legacy shops until an explicit publication review; no auto-backfill.
   slug        String? @unique
   published   Boolean @default(false)
+  suspended Boolean @default(false)
+  administrativeChanges BarbershopAdministrationChange[]
   phones      String[]
   services    BarbershopService[]
   bookings    Booking[]
@@ -264,6 +266,7 @@ model GlobalAdmin {
   createdAt DateTime @default(now()) @db.Timestamptz
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz
   confirmedPixPayments ManualPixPayment[]
+  administrativeChanges BarbershopAdministrationChange[]
 }
 
 // Manual SaaS subscription receipts only. No bank integration or service money.
@@ -364,4 +367,16 @@ model LegacyStripeOperation {
 
   @@index([status, updatedAt])
   @@index([bookingId])
+}
+
+model BarbershopAdministrationChange {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  globalAdminId String
+  globalAdmin GlobalAdmin @relation(fields: [globalAdminId], references: [id], onDelete: Restrict)
+  previousSuspended Boolean
+  suspended Boolean
+  createdAt DateTime @default(now()) @db.Timestamptz
+  @@index([barbershopId, createdAt])
 }

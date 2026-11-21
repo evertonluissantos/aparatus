@@ -112,3 +112,8 @@ export type LegacyStripeAttempt = Prisma.LegacyStripeAttemptModel
  *
  */
 export type LegacyStripeOperation = Prisma.LegacyStripeOperationModel
+/**
+ * Model BarbershopAdministrationChange
+ *
+ */
+export type BarbershopAdministrationChange = Prisma.BarbershopAdministrationChangeModel

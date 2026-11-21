@@ -184,6 +184,7 @@ export type GlobalAdminWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"GlobalAdmin"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   confirmedPixPayments?: Prisma.ManualPixPaymentListRelationFilter
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeListRelationFilter
 }
 
 export type GlobalAdminOrderByWithRelationInput = {
@@ -194,6 +195,7 @@ export type GlobalAdminOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   confirmedPixPayments?: Prisma.ManualPixPaymentOrderByRelationAggregateInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeOrderByRelationAggregateInput
 }
 
 export type GlobalAdminWhereUniqueInput = Prisma.AtLeast<{
@@ -207,6 +209,7 @@ export type GlobalAdminWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"GlobalAdmin"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   confirmedPixPayments?: Prisma.ManualPixPaymentListRelationFilter
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeListRelationFilter
 }, "id" | "userId">
 
 export type GlobalAdminOrderByWithAggregationInput = {
@@ -238,6 +241,7 @@ export type GlobalAdminCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
   confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateInput = {
@@ -247,6 +251,7 @@ export type GlobalAdminUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUpdateInput = {
@@ -256,6 +261,7 @@ export type GlobalAdminUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
   confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateInput = {
@@ -265,6 +271,7 @@ export type GlobalAdminUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminCreateManyInput = {
@@ -370,12 +377,27 @@ export type GlobalAdminUpdateOneRequiredWithoutConfirmedPixPaymentsNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.GlobalAdminUpdateToOneWithWhereWithoutConfirmedPixPaymentsInput, Prisma.GlobalAdminUpdateWithoutConfirmedPixPaymentsInput>, Prisma.GlobalAdminUncheckedUpdateWithoutConfirmedPixPaymentsInput>
 }
 
+export type GlobalAdminCreateNestedOneWithoutAdministrativeChangesInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutAdministrativeChangesInput, Prisma.GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutAdministrativeChangesInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+}
+
+export type GlobalAdminUpdateOneRequiredWithoutAdministrativeChangesNestedInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutAdministrativeChangesInput, Prisma.GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutAdministrativeChangesInput
+  upsert?: Prisma.GlobalAdminUpsertWithoutAdministrativeChangesInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GlobalAdminUpdateToOneWithWhereWithoutAdministrativeChangesInput, Prisma.GlobalAdminUpdateWithoutAdministrativeChangesInput>, Prisma.GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput>
+}
+
 export type GlobalAdminCreateWithoutUserInput = {
   id?: string
   active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateWithoutUserInput = {
@@ -384,6 +406,7 @@ export type GlobalAdminUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminCreateOrConnectWithoutUserInput = {
@@ -408,6 +431,7 @@ export type GlobalAdminUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateWithoutUserInput = {
@@ -416,6 +440,7 @@ export type GlobalAdminUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminCreateWithoutConfirmedPixPaymentsInput = {
@@ -424,6 +449,7 @@ export type GlobalAdminCreateWithoutConfirmedPixPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateWithoutConfirmedPixPaymentsInput = {
@@ -432,6 +458,7 @@ export type GlobalAdminUncheckedCreateWithoutConfirmedPixPaymentsInput = {
   active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminCreateOrConnectWithoutConfirmedPixPaymentsInput = {
@@ -456,6 +483,7 @@ export type GlobalAdminUpdateWithoutConfirmedPixPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateWithoutConfirmedPixPaymentsInput = {
@@ -464,6 +492,59 @@ export type GlobalAdminUncheckedUpdateWithoutConfirmedPixPaymentsInput = {
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+}
+
+export type GlobalAdminCreateWithoutAdministrativeChangesInput = {
+  id?: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+}
+
+export type GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput = {
+  id?: string
+  userId: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+}
+
+export type GlobalAdminCreateOrConnectWithoutAdministrativeChangesInput = {
+  where: Prisma.GlobalAdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutAdministrativeChangesInput, Prisma.GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput>
+}
+
+export type GlobalAdminUpsertWithoutAdministrativeChangesInput = {
+  update: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutAdministrativeChangesInput, Prisma.GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput>
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutAdministrativeChangesInput, Prisma.GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput>
+  where?: Prisma.GlobalAdminWhereInput
+}
+
+export type GlobalAdminUpdateToOneWithWhereWithoutAdministrativeChangesInput = {
+  where?: Prisma.GlobalAdminWhereInput
+  data: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutAdministrativeChangesInput, Prisma.GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput>
+}
+
+export type GlobalAdminUpdateWithoutAdministrativeChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+}
+
+export type GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
 }
 
 
@@ -473,10 +554,12 @@ export type GlobalAdminUncheckedUpdateWithoutConfirmedPixPaymentsInput = {
 
 export type GlobalAdminCountOutputType = {
   confirmedPixPayments: number
+  administrativeChanges: number
 }
 
 export type GlobalAdminCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   confirmedPixPayments?: boolean | GlobalAdminCountOutputTypeCountConfirmedPixPaymentsArgs
+  administrativeChanges?: boolean | GlobalAdminCountOutputTypeCountAdministrativeChangesArgs
 }
 
 /**
@@ -496,6 +579,13 @@ export type GlobalAdminCountOutputTypeCountConfirmedPixPaymentsArgs<ExtArgs exte
   where?: Prisma.ManualPixPaymentWhereInput
 }
 
+/**
+ * GlobalAdminCountOutputType without action
+ */
+export type GlobalAdminCountOutputTypeCountAdministrativeChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarbershopAdministrationChangeWhereInput
+}
+
 
 export type GlobalAdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -505,6 +595,7 @@ export type GlobalAdminSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   confirmedPixPayments?: boolean | Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs>
+  administrativeChanges?: boolean | Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs>
   _count?: boolean | Prisma.GlobalAdminCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["globalAdmin"]>
 
@@ -538,6 +629,7 @@ export type GlobalAdminOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type GlobalAdminInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   confirmedPixPayments?: boolean | Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs>
+  administrativeChanges?: boolean | Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs>
   _count?: boolean | Prisma.GlobalAdminCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GlobalAdminIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -552,6 +644,7 @@ export type $GlobalAdminPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     confirmedPixPayments: Prisma.$ManualPixPaymentPayload<ExtArgs>[]
+    administrativeChanges: Prisma.$BarbershopAdministrationChangePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -955,6 +1048,7 @@ export interface Prisma__GlobalAdminClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   confirmedPixPayments<T extends Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManualPixPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  administrativeChanges<T extends Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopAdministrationChangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1406,6 +1500,30 @@ export type GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.ManualPixPaymentScalarFieldEnum | Prisma.ManualPixPaymentScalarFieldEnum[]
+}
+
+/**
+ * GlobalAdmin.administrativeChanges
+ */
+export type GlobalAdmin$administrativeChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopAdministrationChange
+   */
+  select?: Prisma.BarbershopAdministrationChangeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarbershopAdministrationChange
+   */
+  omit?: Prisma.BarbershopAdministrationChangeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarbershopAdministrationChangeInclude<ExtArgs> | null
+  where?: Prisma.BarbershopAdministrationChangeWhereInput
+  orderBy?: Prisma.BarbershopAdministrationChangeOrderByWithRelationInput | Prisma.BarbershopAdministrationChangeOrderByWithRelationInput[]
+  cursor?: Prisma.BarbershopAdministrationChangeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarbershopAdministrationChangeScalarFieldEnum | Prisma.BarbershopAdministrationChangeScalarFieldEnum[]
 }
 
 /**

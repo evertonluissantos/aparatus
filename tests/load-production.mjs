@@ -19,6 +19,7 @@ const sources = new Set([
   "lib/owner-auth-policy.ts",
   "lib/management-access.ts",
   "lib/manual-pix.ts",
+  "lib/global-management.ts",
   "lib/mvp-http.ts",
   "lib/owner-store.ts",
   "lib/mvp-bookings.ts",

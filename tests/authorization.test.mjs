@@ -22,6 +22,7 @@ function fixture({
   admins = [],
   entities = {},
   assignments = [],
+  suspendedShops = [],
 } = {}) {
   const queries = [];
   let unavailable = false;
@@ -46,6 +47,13 @@ function fixture({
           const sql = parts.join("?");
           queries.push({ sql, values });
           if (unavailable) throw new Error("mock missing membership table");
+          if (
+            sql.includes('FROM "Barbershop"') &&
+            !sql.includes('FROM "BarbershopMembership"')
+          )
+            return suspendedShops.includes(values[0])
+              ? []
+              : [{ id: values[0] }];
           if (sql.includes('FROM "BarbershopMembership"'))
             return memberships.filter(
               (row) =>
@@ -129,7 +137,10 @@ test("authorization: owner receives only server-derived tenant identity", async 
   assert.equal(context.userId, "user-a");
   assert.equal(context.role, "OWNER");
   assert.equal(context.barbershopId, shopA);
-  assert.deepEqual(f.queries[0].values, ["user-a", shopA]);
+  assert.deepEqual(
+    f.queries.find((q) => q.sql.includes('FROM "BarbershopMembership"')).values,
+    ["user-a", shopA],
+  );
 });
 
 test("authorization: manager can manage bookings but not finances or settings", async () => {
@@ -342,4 +353,14 @@ test("authorization: invalid resource kind/access cannot choose arbitrary tables
   await denied(f.requireBarbershopEntity(shopA, "GlobalAdmin", resourceA));
   await denied(f.requireBarbershopEntity(shopA, "service", resourceA, "grant"));
   assert.equal(f.queries.length, 0);
+});
+
+test("suspended shops refuse direct operational permissions without affecting another shop", async () => {
+  const f = fixture({
+    memberships: [membership(shopA), membership(shopB)],
+    suspendedShops: [shopA],
+  });
+  await denied(f.requireBarbershopPermission(shopA, "services:write"));
+  const allowed = await f.requireBarbershopPermission(shopB, "services:write");
+  assert.equal(allowed.barbershopId, shopB);
 });

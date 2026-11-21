@@ -2,12 +2,12 @@ export const globalSections = {
   proprietarios: {
     title: "Proprietários",
     description:
-      "Espaço reservado para consulta de proprietários após integração com autenticação e autorização global.",
+      "Consulta de proprietários, contas sem vínculo e situação da barbearia vinculada.",
   },
   barbearias: {
     title: "Barbearias cadastradas",
     description:
-      "A consulta global de estabelecimentos depende de persistência e autorização. Nenhum cadastro real é listado aqui.",
+      "Estabelecimentos, proprietários, publicação, situação administrativa e última competência Pix.",
   },
   assinaturas: {
     title: "Assinaturas",
@@ -22,6 +22,6 @@ export const globalSections = {
   "ativacoes-suspensoes": {
     title: "Ativações e suspensões",
     description:
-      "Estrutura reservada para futuras decisões administrativas autorizadas. Nenhum bloqueio ou mudança de acesso é executado.",
+      "Suspensão e reativação manuais com registro do administrador e preservação dos históricos.",
   },
 };

@@ -402,7 +402,8 @@ export const ModelName = {
   Customer: 'Customer',
   LegacyStripeEvent: 'LegacyStripeEvent',
   LegacyStripeAttempt: 'LegacyStripeAttempt',
-  LegacyStripeOperation: 'LegacyStripeOperation'
+  LegacyStripeOperation: 'LegacyStripeOperation',
+  BarbershopAdministrationChange: 'BarbershopAdministrationChange'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -418,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "barbershop" | "barbershopService" | "booking" | "professional" | "professionalService" | "workingHours" | "scheduleBlock" | "user" | "session" | "account" | "verification" | "barbershopMembership" | "globalAdmin" | "manualPixPayment" | "bookingCommand" | "customer" | "legacyStripeEvent" | "legacyStripeAttempt" | "legacyStripeOperation"
+    modelProps: "barbershop" | "barbershopService" | "booking" | "professional" | "professionalService" | "workingHours" | "scheduleBlock" | "user" | "session" | "account" | "verification" | "barbershopMembership" | "globalAdmin" | "manualPixPayment" | "bookingCommand" | "customer" | "legacyStripeEvent" | "legacyStripeAttempt" | "legacyStripeOperation" | "barbershopAdministrationChange"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1828,6 +1829,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BarbershopAdministrationChange: {
+      payload: Prisma.$BarbershopAdministrationChangePayload<ExtArgs>
+      fields: Prisma.BarbershopAdministrationChangeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BarbershopAdministrationChangeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BarbershopAdministrationChangeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>
+        }
+        findFirst: {
+          args: Prisma.BarbershopAdministrationChangeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BarbershopAdministrationChangeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>
+        }
+        findMany: {
+          args: Prisma.BarbershopAdministrationChangeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>[]
+        }
+        create: {
+          args: Prisma.BarbershopAdministrationChangeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>
+        }
+        createMany: {
+          args: Prisma.BarbershopAdministrationChangeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BarbershopAdministrationChangeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>[]
+        }
+        delete: {
+          args: Prisma.BarbershopAdministrationChangeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>
+        }
+        update: {
+          args: Prisma.BarbershopAdministrationChangeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>
+        }
+        deleteMany: {
+          args: Prisma.BarbershopAdministrationChangeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BarbershopAdministrationChangeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BarbershopAdministrationChangeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>[]
+        }
+        upsert: {
+          args: Prisma.BarbershopAdministrationChangeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopAdministrationChangePayload>
+        }
+        aggregate: {
+          args: Prisma.BarbershopAdministrationChangeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBarbershopAdministrationChange>
+        }
+        groupBy: {
+          args: Prisma.BarbershopAdministrationChangeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarbershopAdministrationChangeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BarbershopAdministrationChangeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarbershopAdministrationChangeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1875,6 +1950,7 @@ export const BarbershopScalarFieldEnum = {
   imageUrl: 'imageUrl',
   slug: 'slug',
   published: 'published',
+  suspended: 'suspended',
   phones: 'phones',
   timeZone: 'timeZone'
 } as const
@@ -2136,6 +2212,18 @@ export const LegacyStripeOperationScalarFieldEnum = {
 } as const
 
 export type LegacyStripeOperationScalarFieldEnum = (typeof LegacyStripeOperationScalarFieldEnum)[keyof typeof LegacyStripeOperationScalarFieldEnum]
+
+
+export const BarbershopAdministrationChangeScalarFieldEnum = {
+  id: 'id',
+  barbershopId: 'barbershopId',
+  globalAdminId: 'globalAdminId',
+  previousSuspended: 'previousSuspended',
+  suspended: 'suspended',
+  createdAt: 'createdAt'
+} as const
+
+export type BarbershopAdministrationChangeScalarFieldEnum = (typeof BarbershopAdministrationChangeScalarFieldEnum)[keyof typeof BarbershopAdministrationChangeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2416,6 +2504,7 @@ export type GlobalOmitConfig = {
   legacyStripeEvent?: Prisma.LegacyStripeEventOmit
   legacyStripeAttempt?: Prisma.LegacyStripeAttemptOmit
   legacyStripeOperation?: Prisma.LegacyStripeOperationOmit
+  barbershopAdministrationChange?: Prisma.BarbershopAdministrationChangeOmit
 }
 
 /* Types for Logging */

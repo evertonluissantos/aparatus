@@ -21,6 +21,7 @@ function fixture({
   inactiveService = false,
   guestCommand = null,
   published = true,
+  suspended = false,
   guestCount = 0,
 } = {}) {
   const calls = [];
@@ -84,6 +85,7 @@ function fixture({
         }));
       if (text.includes('FROM "ScheduleBlock"')) return [];
       if (text.includes("FOR UPDATE")) return [{ id: shop }];
+      if (text.includes('"suspended"=false') && suspended) return [];
       if (text.includes('"published"=true'))
         return published ? [{ id: shop }] : [];
       if (text.includes('FROM "Barbershop"'))
@@ -358,4 +360,18 @@ test("prepared PostgreSQL launcher: only explicit local opt-in with no URL/prelo
       /opt-in/,
     );
   assert.throws(() => requireDisposableOptIn({}), /opt-in/);
+});
+
+test("suspended shop refuses public bookings under the shop lock, before any writes", async () => {
+  const f = fixture({ suspended: true });
+  await assert.rejects(
+    f.adapter.createGuestBooking(request, key, "a".repeat(64), {
+      name: "Ficticio",
+      phone: "",
+    }),
+  );
+  assert.equal(
+    f.calls.some((c) => /INSERT|UPDATE \"Booking\"/.test(c.text)),
+    false,
+  );
 });
