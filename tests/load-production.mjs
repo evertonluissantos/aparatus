@@ -20,6 +20,7 @@ const sources = new Set([
   "lib/management-access.ts",
   "lib/manual-pix.ts",
   "lib/global-management.ts",
+  "lib/global-reports.ts",
   "lib/mvp-http.ts",
   "lib/owner-store.ts",
   "lib/mvp-bookings.ts",

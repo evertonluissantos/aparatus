@@ -13,6 +13,7 @@ import "./bookings.test.mjs";
 import "./booking-persistence.test.mjs";
 import "./mvp.test.mjs";
 import "./global-management.test.mjs";
+import "./global-reports.test.mjs";
 import "./neon-safety.test.mjs";
 import "./neon-connection.test.mjs";
 import "./neon-migration-inspection.test.mjs";

@@ -12,12 +12,12 @@ export const globalSections = {
   assinaturas: {
     title: "Assinaturas",
     description:
-      "Estrutura reservada para acompanhamento das mensalidades. Nenhuma assinatura é criada ou alterada nesta etapa.",
+      "Cobertura mensal por competência Pix confirmada, sem cobrança automática.",
   },
   "pagamentos-pix": {
     title: "Pagamentos Pix",
     description:
-      "A confirmação manual de mensalidades Pix será exclusiva do administrador global. Não há confirmação ou cobrança disponível nesta prévia.",
+      "Confirmação manual de recebimentos e histórico de mensalidades do Studio Notreve.",
   },
   "ativacoes-suspensoes": {
     title: "Ativações e suspensões",
