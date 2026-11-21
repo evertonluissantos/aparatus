@@ -24,6 +24,9 @@ model Barbershop {
   slug        String? @unique
   published   Boolean @default(false)
   suspended Boolean @default(false)
+  approvalStatus BarbershopApprovalStatus @default(PENDING)
+  freeTrials BarbershopFreeTrial[]
+  commercialEvents BarbershopCommercialEvent[]
   administrativeChanges BarbershopAdministrationChange[]
   phones      String[]
   services    BarbershopService[]
@@ -267,6 +270,9 @@ model GlobalAdmin {
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz
   confirmedPixPayments ManualPixPayment[]
   administrativeChanges BarbershopAdministrationChange[]
+  grantedTrials BarbershopFreeTrial[] @relation("TrialGrant")
+  updatedTrials BarbershopFreeTrial[] @relation("TrialUpdate")
+  commercialEvents BarbershopCommercialEvent[]
 }
 
 // Manual SaaS subscription receipts only. No bank integration or service money.
@@ -377,6 +383,37 @@ model BarbershopAdministrationChange {
   globalAdmin GlobalAdmin @relation(fields: [globalAdminId], references: [id], onDelete: Restrict)
   previousSuspended Boolean
   suspended Boolean
+  createdAt DateTime @default(now()) @db.Timestamptz
+  @@index([barbershopId, createdAt])
+}
+
+enum BarbershopApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+model BarbershopFreeTrial {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  startsAt DateTime @db.Timestamptz
+  endsAt DateTime @db.Timestamptz
+  grantedById String
+  grantedBy GlobalAdmin @relation("TrialGrant", fields: [grantedById], references: [id], onDelete: Restrict)
+  updatedById String
+  updatedBy GlobalAdmin @relation("TrialUpdate", fields: [updatedById], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @db.Timestamptz
+  @@index([barbershopId, createdAt])
+}
+model BarbershopCommercialEvent {
+  id String @id @default(uuid())
+  barbershopId String
+  barbershop Barbershop @relation(fields: [barbershopId], references: [id], onDelete: Restrict)
+  globalAdminId String
+  globalAdmin GlobalAdmin @relation(fields: [globalAdminId], references: [id], onDelete: Restrict)
+  action String
+  details Json
   createdAt DateTime @default(now()) @db.Timestamptz
   @@index([barbershopId, createdAt])
 }

@@ -16,12 +16,14 @@ export async function executiveReport() {
         published: string;
         owners: string;
         accounts: string;
+        pending: string;
       }[]
     >`
       SELECT
       (SELECT COALESCE(sum("amountInCents"),0)::text FROM "ManualPixPayment") AS "totalReceived",
       (SELECT COALESCE(sum("amountInCents"),0)::text FROM "ManualPixPayment" WHERE date_trunc('month',"confirmedAt" AT TIME ZONE 'America/Sao_Paulo')=date_trunc('month',now() AT TIME ZONE 'America/Sao_Paulo')) AS "monthReceived",
       (SELECT count(*)::text FROM "ManualPixPayment") AS "payments",
+      count(*) FILTER(WHERE "approvalStatus"='PENDING')::text AS "pending",
       count(*)::text AS "shops",count(*) FILTER(WHERE NOT "suspended")::text AS "active",
       count(*) FILTER(WHERE "suspended")::text AS "suspended",count(*) FILTER(WHERE "published")::text AS "published",
       (SELECT count(DISTINCT "userId")::text FROM "BarbershopMembership" WHERE "role"='OWNER') AS "owners",

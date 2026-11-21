@@ -7,6 +7,7 @@ test("MVP public readers require publication and an active owner", () => {
   assert.deepEqual(publicBarbershopWhere(true), {
     published: true,
     suspended: false,
+    approvalStatus: "APPROVED",
     memberships: { some: { role: "OWNER", active: true } },
   });
   assert.deepEqual(publicBarbershopWhere(false), {});

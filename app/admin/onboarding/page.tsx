@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useState, type FormEvent } from "react";
 import { ArrowRight, Building2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/app/_components/ui/button";
@@ -22,6 +23,7 @@ const initial: BarbershopInput = {
   imageUrl: "/banner.png",
 };
 export default function OnboardingPage() {
+  const router = useRouter();
   const { addShop, selectedShop, shops, persistent } = useDemoBarbershop();
   const [registrationError, setRegistrationError] = useState("");
   const [values, setValues] = useState(initial);
@@ -45,6 +47,7 @@ export default function OnboardingPage() {
     }
     try {
       setCreated(await addShop(values));
+      if (persistent) router.refresh();
     } catch (error) {
       setRegistrationError(
         error instanceof Error
@@ -73,7 +76,7 @@ export default function OnboardingPage() {
           className="text-2xl font-semibold tracking-tight"
         >
           {persistent
-            ? "Sua barbearia está cadastrada!"
+            ? "Cadastro recebido. Aguarde a aprovação."
             : "Sua barbearia de exemplo está pronta!"}
         </h1>
         <p className="text-muted-foreground mt-3">
@@ -94,13 +97,13 @@ export default function OnboardingPage() {
         </dl>
         <p className="text-muted-foreground mb-6 text-sm">
           {persistent
-            ? "Configure serviços, profissionais e horários antes de publicar sua barbearia. Nenhum pagamento foi criado."
+            ? "O Studio Notreve precisa aprovar seu cadastro antes de liberar os recursos operacionais. Nenhum pagamento foi criado."
             : "Criamos apenas um contexto temporário no navegador, com serviços fictícios de exemplo. Nenhuma conta, membership ou mensalidade foi criada."}
         </p>
-        <PublicationControls shopId={created.id} />
+        {!persistent && <PublicationControls shopId={created.id} />}
         <Button asChild>
           <Link prefetch={false} href="/painel">
-            Explorar painel
+            {persistent ? "Consultar aprovação" : "Explorar painel"}
             <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </Button>

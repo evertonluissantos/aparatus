@@ -53,7 +53,9 @@ export class AuthorizationError extends Error {
       | "UNAUTHENTICATED"
       | "FORBIDDEN"
       | "INVALID_INPUT"
-      | "NOT_FOUND",
+      | "NOT_FOUND"
+      | "PENDING_APPROVAL"
+      | "REJECTED_APPROVAL",
   ) {
     super(code);
     this.name = "AuthorizationError";
@@ -78,6 +80,7 @@ type Membership = {
   role: MembershipRole;
   active: boolean;
   suspended?: boolean;
+  approvalStatus?: string;
 };
 
 // Read all owner links, including inactive ones: suspension must not allow a
@@ -86,7 +89,8 @@ export async function requireOwnerPanelAccess() {
   const { userId } = await requireAuthenticatedUser();
   const rows = await prisma.$queryRaw<Membership[]>`
     SELECT "id", "userId", "barbershopId", "role", "active",
-      (SELECT b."suspended" FROM "Barbershop" b WHERE b."id"="barbershopId") AS "suspended"
+      (SELECT b."suspended" FROM "Barbershop" b WHERE b."id"="barbershopId") AS "suspended",
+      (SELECT b."approvalStatus" FROM "Barbershop" b WHERE b."id"="barbershopId") AS "approvalStatus"
     FROM "BarbershopMembership" WHERE "userId" = ${userId} AND "role" = 'OWNER' LIMIT 2`;
   if (
     rows.length > 1 ||
@@ -99,6 +103,10 @@ export async function requireOwnerPanelAccess() {
     )
   )
     throw new AuthorizationError("FORBIDDEN");
+  if (rows[0]?.approvalStatus === "PENDING")
+    throw new AuthorizationError("PENDING_APPROVAL");
+  if (rows[0]?.approvalStatus === "REJECTED")
+    throw new AuthorizationError("REJECTED_APPROVAL");
   return { userId, barbershopId: rows[0]?.barbershopId ?? null };
 }
 
@@ -111,7 +119,7 @@ async function requirePermissionWithDatabase(
   requireId(barbershopId);
   // Same lock order as operational writers and suspension: shop, then membership.
   const shops = await database.$queryRaw<{ id: string }[]>`
-    SELECT "id" FROM "Barbershop" WHERE "id"=${barbershopId} AND "suspended"=false FOR SHARE`;
+    SELECT "id" FROM "Barbershop" WHERE "id"=${barbershopId} AND "suspended"=false AND "approvalStatus"='APPROVED' FOR SHARE`;
   if (!shops[0]) throw new AuthorizationError("FORBIDDEN");
   // Parameterized SQL avoids delegates unavailable in the pre-migration client.
   // Missing tables/DB failures propagate: there is deliberately no legacy fallback.

@@ -70,7 +70,9 @@ export const ModelName = {
   LegacyStripeEvent: 'LegacyStripeEvent',
   LegacyStripeAttempt: 'LegacyStripeAttempt',
   LegacyStripeOperation: 'LegacyStripeOperation',
-  BarbershopAdministrationChange: 'BarbershopAdministrationChange'
+  BarbershopAdministrationChange: 'BarbershopAdministrationChange',
+  BarbershopFreeTrial: 'BarbershopFreeTrial',
+  BarbershopCommercialEvent: 'BarbershopCommercialEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -98,6 +100,7 @@ export const BarbershopScalarFieldEnum = {
   slug: 'slug',
   published: 'published',
   suspended: 'suspended',
+  approvalStatus: 'approvalStatus',
   phones: 'phones',
   timeZone: 'timeZone'
 } as const
@@ -371,6 +374,32 @@ export const BarbershopAdministrationChangeScalarFieldEnum = {
 } as const
 
 export type BarbershopAdministrationChangeScalarFieldEnum = (typeof BarbershopAdministrationChangeScalarFieldEnum)[keyof typeof BarbershopAdministrationChangeScalarFieldEnum]
+
+
+export const BarbershopFreeTrialScalarFieldEnum = {
+  id: 'id',
+  barbershopId: 'barbershopId',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  grantedById: 'grantedById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BarbershopFreeTrialScalarFieldEnum = (typeof BarbershopFreeTrialScalarFieldEnum)[keyof typeof BarbershopFreeTrialScalarFieldEnum]
+
+
+export const BarbershopCommercialEventScalarFieldEnum = {
+  id: 'id',
+  barbershopId: 'barbershopId',
+  globalAdminId: 'globalAdminId',
+  action: 'action',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type BarbershopCommercialEventScalarFieldEnum = (typeof BarbershopCommercialEventScalarFieldEnum)[keyof typeof BarbershopCommercialEventScalarFieldEnum]
 
 
 export const SortOrder = {

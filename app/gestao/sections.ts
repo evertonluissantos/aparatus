@@ -1,4 +1,9 @@
 export const globalSections = {
+  aprovacoes: {
+    title: "Aprovações e testes",
+    description:
+      "Solicitações e períodos gratuitos independentes de Pix e suspensão.",
+  },
   proprietarios: {
     title: "Proprietários",
     description:

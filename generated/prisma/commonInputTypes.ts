@@ -49,6 +49,13 @@ export type BoolFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
 }
 
+export type EnumBarbershopApprovalStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.BarbershopApprovalStatus | Prisma.EnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBarbershopApprovalStatusFilter<$PrismaModel> | $Enums.BarbershopApprovalStatus
+}
+
 export type SortOrderInput = {
   sort: Prisma.SortOrder
   nulls?: Prisma.NullsOrder
@@ -96,6 +103,16 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type EnumBarbershopApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BarbershopApprovalStatus | Prisma.EnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBarbershopApprovalStatusWithAggregatesFilter<$PrismaModel> | $Enums.BarbershopApprovalStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBarbershopApprovalStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBarbershopApprovalStatusFilter<$PrismaModel>
 }
 
 export type IntFilter<$PrismaModel = never> = {
@@ -350,6 +367,13 @@ export type NestedBoolFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
 }
 
+export type NestedEnumBarbershopApprovalStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.BarbershopApprovalStatus | Prisma.EnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBarbershopApprovalStatusFilter<$PrismaModel> | $Enums.BarbershopApprovalStatus
+}
+
 export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -412,6 +436,16 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type NestedEnumBarbershopApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BarbershopApprovalStatus | Prisma.EnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BarbershopApprovalStatus[] | Prisma.ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBarbershopApprovalStatusWithAggregatesFilter<$PrismaModel> | $Enums.BarbershopApprovalStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBarbershopApprovalStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBarbershopApprovalStatusFilter<$PrismaModel>
 }
 
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {

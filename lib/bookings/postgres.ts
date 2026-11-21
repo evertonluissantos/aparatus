@@ -121,7 +121,7 @@ export function createPostgresBookingAdapter(
     // global blocks; per-professional protocol only after measured demand.
     const rows = await sql.$queryRaw<
       { id: string }[]
-    >`SELECT "id" FROM "Barbershop" WHERE "id" = ${scope.barbershopId} AND "suspended"=false FOR UPDATE`;
+    >`SELECT "id" FROM "Barbershop" WHERE "id" = ${scope.barbershopId} AND "suspended"=false AND "approvalStatus"='APPROVED' FOR UPDATE`;
     if (!rows[0]) throw new BookingRuleError("ENTITY_NOT_FOUND");
   }
   async function create(
@@ -235,7 +235,7 @@ export function createPostgresBookingAdapter(
           } else {
             const shops = await sql.$queryRaw<
               { id: string }[]
-            >`SELECT "id" FROM "Barbershop" WHERE "id"=${request.barbershopId} AND "published"=true AND "suspended"=false AND EXISTS (SELECT 1 FROM "BarbershopMembership" owner WHERE owner."barbershopId"="Barbershop"."id" AND owner."role"='OWNER' AND owner."active"=true)`;
+            >`SELECT "id" FROM "Barbershop" WHERE "id"=${request.barbershopId} AND "published"=true AND "suspended"=false AND "approvalStatus"='APPROVED' AND EXISTS (SELECT 1 FROM "BarbershopMembership" owner WHERE owner."barbershopId"="Barbershop"."id" AND owner."role"='OWNER' AND owner."active"=true)`;
             if (!shops[0]) throw new BookingRuleError("ENTITY_NOT_FOUND");
           }
           const commands = await sql.$queryRaw<

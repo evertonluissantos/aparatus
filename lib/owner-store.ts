@@ -87,7 +87,7 @@ export async function loadShop(
 ): Promise<DemoBarbershop | null> {
   const rows = await sql.$queryRaw<
     Row[]
-  >`SELECT * FROM "Barbershop" WHERE "id" = ${id} AND (${!publicOnly} OR ("published" = true AND "suspended"=false))`;
+  >`SELECT * FROM "Barbershop" WHERE "id" = ${id} AND (${!publicOnly} OR ("published" = true AND "suspended"=false AND "approvalStatus"='APPROVED'))`;
   if (!rows[0]) return null;
   const row = rows[0];
   const services = await sql.$queryRaw<
@@ -277,7 +277,7 @@ export async function ownerCommand(input: unknown) {
             .slice(0, 50)
             .replace(/-+$/, "") || "barbearia"
         }-${id.slice(0, 8)}`;
-        await tx.$queryRaw`INSERT INTO "Barbershop" ("id","name","address","description","imageUrl","phones","slug","published","timeZone") VALUES (${id},${data.name},${data.address},${data.description},${data.imageUrl},ARRAY[${data.phone}],${slug},false,'America/Sao_Paulo') RETURNING "id"`;
+        await tx.$queryRaw`INSERT INTO "Barbershop" ("id","name","address","description","imageUrl","phones","slug","published","timeZone","approvalStatus") VALUES (${id},${data.name},${data.address},${data.description},${data.imageUrl},ARRAY[${data.phone}],${slug},false,'America/Sao_Paulo','PENDING') RETURNING "id"`;
         await tx.$queryRaw`INSERT INTO "BarbershopMembership" ("id","userId","barbershopId","role","active","updatedAt") VALUES (${randomUUID()},${owner.userId},${id},'OWNER',true,now()) RETURNING "id"`;
         return loadShop(tx, id);
       }

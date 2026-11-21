@@ -13,6 +13,27 @@ export async function ManagementGate({
 }) {
   const access = await managementAccess(area);
   if (access === "login") redirect("/acesso/proprietario");
+  if (access === "pending" || access === "rejected")
+    return (
+      <main className="mx-auto max-w-xl space-y-5 p-8">
+        <h1 className="text-2xl font-semibold">
+          {access === "pending"
+            ? "Sua barbearia aguarda aprovação"
+            : "Cadastro não aprovado"}
+        </h1>
+        <p className="text-muted-foreground">
+          {access === "pending"
+            ? "O Studio Notreve analisará seu cadastro. Os recursos operacionais serão liberados após a aprovação administrativa, independentemente de pagamento Pix."
+            : "O Studio Notreve rejeitou a solicitação. Seus dados foram preservados. Entre em contato com o administrador para esclarecimentos."}
+        </p>
+        <Link className="underline" href="/painel" prefetch={false}>
+          Consultar situação
+        </Link>
+        <Link className="block underline" href="/acesso/proprietario">
+          Voltar ao acesso
+        </Link>
+      </main>
+    );
   if (access === "authorized" && area === "owner") {
     const shop = await ownerShop();
     return (

@@ -21,8 +21,11 @@ export async function managementAccess(area: "owner" | "global") {
     else await requireOwnerPanelAccess();
     return "authorized";
   } catch (error) {
-    if (error instanceof AuthorizationError)
+    if (error instanceof AuthorizationError) {
+      if (error.code === "PENDING_APPROVAL") return "pending";
+      if (error.code === "REJECTED_APPROVAL") return "rejected";
       return error.code === "UNAUTHENTICATED" ? "login" : "forbidden";
+    }
     // Missing tables, unavailable session/database, etc. never allow access.
     return "unavailable";
   }

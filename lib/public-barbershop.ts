@@ -6,6 +6,7 @@ export function publicBarbershopWhere(enabled: boolean) {
     ? ({
         published: true,
         suspended: false,
+        approvalStatus: "APPROVED" as const,
         memberships: {
           some: { role: "OWNER" as const, active: true },
         },

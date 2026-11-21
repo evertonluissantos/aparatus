@@ -35,3 +35,12 @@ export const BarbershopRole = {
 } as const
 
 export type BarbershopRole = (typeof BarbershopRole)[keyof typeof BarbershopRole]
+
+
+export const BarbershopApprovalStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type BarbershopApprovalStatus = (typeof BarbershopApprovalStatus)[keyof typeof BarbershopApprovalStatus]

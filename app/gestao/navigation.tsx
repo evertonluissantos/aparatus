@@ -12,6 +12,11 @@ import {
 } from "lucide-react";
 const items = [
   { href: "/gestao", label: "Visão geral", icon: LayoutDashboard },
+  {
+    href: "/gestao/aprovacoes",
+    label: "Aprovações e testes",
+    icon: ShieldCheck,
+  },
   { href: "/gestao/proprietarios", label: "Proprietários", icon: Users },
   { href: "/gestao/barbearias", label: "Barbearias", icon: Store },
   { href: "/gestao/assinaturas", label: "Assinaturas", icon: CalendarCheck },

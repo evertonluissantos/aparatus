@@ -403,7 +403,9 @@ export const ModelName = {
   LegacyStripeEvent: 'LegacyStripeEvent',
   LegacyStripeAttempt: 'LegacyStripeAttempt',
   LegacyStripeOperation: 'LegacyStripeOperation',
-  BarbershopAdministrationChange: 'BarbershopAdministrationChange'
+  BarbershopAdministrationChange: 'BarbershopAdministrationChange',
+  BarbershopFreeTrial: 'BarbershopFreeTrial',
+  BarbershopCommercialEvent: 'BarbershopCommercialEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "barbershop" | "barbershopService" | "booking" | "professional" | "professionalService" | "workingHours" | "scheduleBlock" | "user" | "session" | "account" | "verification" | "barbershopMembership" | "globalAdmin" | "manualPixPayment" | "bookingCommand" | "customer" | "legacyStripeEvent" | "legacyStripeAttempt" | "legacyStripeOperation" | "barbershopAdministrationChange"
+    modelProps: "barbershop" | "barbershopService" | "booking" | "professional" | "professionalService" | "workingHours" | "scheduleBlock" | "user" | "session" | "account" | "verification" | "barbershopMembership" | "globalAdmin" | "manualPixPayment" | "bookingCommand" | "customer" | "legacyStripeEvent" | "legacyStripeAttempt" | "legacyStripeOperation" | "barbershopAdministrationChange" | "barbershopFreeTrial" | "barbershopCommercialEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1903,6 +1905,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BarbershopFreeTrial: {
+      payload: Prisma.$BarbershopFreeTrialPayload<ExtArgs>
+      fields: Prisma.BarbershopFreeTrialFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BarbershopFreeTrialFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BarbershopFreeTrialFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>
+        }
+        findFirst: {
+          args: Prisma.BarbershopFreeTrialFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BarbershopFreeTrialFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>
+        }
+        findMany: {
+          args: Prisma.BarbershopFreeTrialFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>[]
+        }
+        create: {
+          args: Prisma.BarbershopFreeTrialCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>
+        }
+        createMany: {
+          args: Prisma.BarbershopFreeTrialCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BarbershopFreeTrialCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>[]
+        }
+        delete: {
+          args: Prisma.BarbershopFreeTrialDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>
+        }
+        update: {
+          args: Prisma.BarbershopFreeTrialUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>
+        }
+        deleteMany: {
+          args: Prisma.BarbershopFreeTrialDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BarbershopFreeTrialUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BarbershopFreeTrialUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>[]
+        }
+        upsert: {
+          args: Prisma.BarbershopFreeTrialUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopFreeTrialPayload>
+        }
+        aggregate: {
+          args: Prisma.BarbershopFreeTrialAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBarbershopFreeTrial>
+        }
+        groupBy: {
+          args: Prisma.BarbershopFreeTrialGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarbershopFreeTrialGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BarbershopFreeTrialCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarbershopFreeTrialCountAggregateOutputType> | number
+        }
+      }
+    }
+    BarbershopCommercialEvent: {
+      payload: Prisma.$BarbershopCommercialEventPayload<ExtArgs>
+      fields: Prisma.BarbershopCommercialEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BarbershopCommercialEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BarbershopCommercialEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>
+        }
+        findFirst: {
+          args: Prisma.BarbershopCommercialEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BarbershopCommercialEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>
+        }
+        findMany: {
+          args: Prisma.BarbershopCommercialEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>[]
+        }
+        create: {
+          args: Prisma.BarbershopCommercialEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>
+        }
+        createMany: {
+          args: Prisma.BarbershopCommercialEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BarbershopCommercialEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>[]
+        }
+        delete: {
+          args: Prisma.BarbershopCommercialEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>
+        }
+        update: {
+          args: Prisma.BarbershopCommercialEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.BarbershopCommercialEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BarbershopCommercialEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BarbershopCommercialEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.BarbershopCommercialEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarbershopCommercialEventPayload>
+        }
+        aggregate: {
+          args: Prisma.BarbershopCommercialEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBarbershopCommercialEvent>
+        }
+        groupBy: {
+          args: Prisma.BarbershopCommercialEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarbershopCommercialEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BarbershopCommercialEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarbershopCommercialEventCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1951,6 +2101,7 @@ export const BarbershopScalarFieldEnum = {
   slug: 'slug',
   published: 'published',
   suspended: 'suspended',
+  approvalStatus: 'approvalStatus',
   phones: 'phones',
   timeZone: 'timeZone'
 } as const
@@ -2226,6 +2377,32 @@ export const BarbershopAdministrationChangeScalarFieldEnum = {
 export type BarbershopAdministrationChangeScalarFieldEnum = (typeof BarbershopAdministrationChangeScalarFieldEnum)[keyof typeof BarbershopAdministrationChangeScalarFieldEnum]
 
 
+export const BarbershopFreeTrialScalarFieldEnum = {
+  id: 'id',
+  barbershopId: 'barbershopId',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  grantedById: 'grantedById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BarbershopFreeTrialScalarFieldEnum = (typeof BarbershopFreeTrialScalarFieldEnum)[keyof typeof BarbershopFreeTrialScalarFieldEnum]
+
+
+export const BarbershopCommercialEventScalarFieldEnum = {
+  id: 'id',
+  barbershopId: 'barbershopId',
+  globalAdminId: 'globalAdminId',
+  action: 'action',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type BarbershopCommercialEventScalarFieldEnum = (typeof BarbershopCommercialEventScalarFieldEnum)[keyof typeof BarbershopCommercialEventScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2290,6 +2467,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+
+
+
+/**
+ * Reference to a field of type 'BarbershopApprovalStatus'
+ */
+export type EnumBarbershopApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BarbershopApprovalStatus'>
+
+
+
+/**
+ * Reference to a field of type 'BarbershopApprovalStatus[]'
+ */
+export type ListEnumBarbershopApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BarbershopApprovalStatus[]'>
 
 
 
@@ -2505,6 +2696,8 @@ export type GlobalOmitConfig = {
   legacyStripeAttempt?: Prisma.LegacyStripeAttemptOmit
   legacyStripeOperation?: Prisma.LegacyStripeOperationOmit
   barbershopAdministrationChange?: Prisma.BarbershopAdministrationChangeOmit
+  barbershopFreeTrial?: Prisma.BarbershopFreeTrialOmit
+  barbershopCommercialEvent?: Prisma.BarbershopCommercialEventOmit
 }
 
 /* Types for Logging */

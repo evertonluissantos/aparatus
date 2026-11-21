@@ -22,6 +22,7 @@ function fixture({
   guestCommand = null,
   published = true,
   suspended = false,
+  approvalStatus = "APPROVED",
   guestCount = 0,
 } = {}) {
   const calls = [];
@@ -86,6 +87,8 @@ function fixture({
       if (text.includes('FROM "ScheduleBlock"')) return [];
       if (text.includes("FOR UPDATE")) return [{ id: shop }];
       if (text.includes('"suspended"=false') && suspended) return [];
+      if (text.includes('"approvalStatus"=') && approvalStatus !== "APPROVED")
+        return [];
       if (text.includes('"published"=true'))
         return published ? [{ id: shop }] : [];
       if (text.includes('FROM "Barbershop"'))
@@ -374,4 +377,20 @@ test("suspended shop refuses public bookings under the shop lock, before any wri
     f.calls.some((c) => /INSERT|UPDATE \"Booking\"/.test(c.text)),
     false,
   );
+});
+
+test("pending and rejected shops cannot receive new bookings, regardless of suspension", async () => {
+  for (const approvalStatus of ["PENDING", "REJECTED"]) {
+    const f = fixture({ approvalStatus, suspended: false });
+    await assert.rejects(
+      f.adapter.createGuestBooking(request, key, "a".repeat(64), {
+        name: "Ficticio",
+        phone: "",
+      }),
+    );
+    assert.equal(
+      f.calls.some((c) => c.text.includes("INSERT INTO")),
+      false,
+    );
+  }
 });

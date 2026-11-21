@@ -139,3 +139,13 @@ export type LegacyStripeOperation = Prisma.LegacyStripeOperationModel
  *
  */
 export type BarbershopAdministrationChange = Prisma.BarbershopAdministrationChangeModel
+/**
+ * Model BarbershopFreeTrial
+ *
+ */
+export type BarbershopFreeTrial = Prisma.BarbershopFreeTrialModel
+/**
+ * Model BarbershopCommercialEvent
+ *
+ */
+export type BarbershopCommercialEvent = Prisma.BarbershopCommercialEventModel

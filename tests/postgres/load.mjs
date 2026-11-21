@@ -12,6 +12,9 @@ function createLoader(database, userId) {
   const allowed = new Set([
     "lib/authorization.ts",
     "lib/global-management.ts",
+    "lib/global-commercial.ts",
+    "lib/commercial-rules.ts",
+    "lib/manual-pix.ts",
     "lib/bookings/postgres.ts",
     "lib/bookings/availability.ts",
     "lib/bookings/rules.ts",
@@ -83,5 +86,15 @@ export function loadGlobalManagement(database, userId) {
   return {
     management: load("lib/global-management.ts"),
     authorization: load("lib/authorization.ts"),
+  };
+}
+
+export function loadCommercialManagement(database, userId) {
+  const load = createLoader(database, userId);
+  return {
+    commercial: load("lib/global-commercial.ts"),
+    management: load("lib/global-management.ts"),
+    authorization: load("lib/authorization.ts"),
+    pix: load("lib/manual-pix.ts"),
   };
 }

@@ -25,6 +25,7 @@ export function ShopsPanel({
     name: string;
     published: boolean;
     suspended: boolean;
+    approvalStatus: "PENDING" | "APPROVED" | "REJECTED";
     ownerName: string | null;
     ownerEmail: string | null;
     lastCompetence: string | null;
@@ -46,7 +47,8 @@ export function ShopsPanel({
         (filter === "active" && !s.suspended) ||
         (filter === "suspended" && s.suspended) ||
         (filter === "published" && s.published) ||
-        (filter === "private" && !s.published)),
+        (filter === "private" && !s.published) ||
+        filter === s.approvalStatus),
   );
   async function change(shop: (typeof shops)[number]) {
     if (busy) return;
@@ -97,6 +99,9 @@ export function ShopsPanel({
           <option value="suspended">Suspensas</option>
           <option value="published">Publicadas</option>
           <option value="private">Não publicadas</option>
+          <option value="PENDING">Aprovação pendente</option>
+          <option value="APPROVED">Aprovadas</option>
+          <option value="REJECTED">Rejeitadas</option>
         </select>
       </div>
       {message && (
@@ -116,6 +121,7 @@ export function ShopsPanel({
             "Barbearia",
             "Proprietário",
             "Publicação",
+            "Aprovação",
             "Situação",
             "Último Pix",
             ...(controls ? ["Ação"] : []),
@@ -133,6 +139,15 @@ export function ShopsPanel({
               </td>
               <td className={cell}>
                 <Status>{s.published ? "Publicada" : "Não publicada"}</Status>
+              </td>
+              <td className={cell}>
+                <Status strong={s.approvalStatus === "APPROVED"}>
+                  {s.approvalStatus === "PENDING"
+                    ? "Pendente"
+                    : s.approvalStatus === "APPROVED"
+                      ? "Aprovada"
+                      : "Rejeitada"}
+                </Status>
               </td>
               <td className={cell}>
                 <Status strong={!s.suspended}>

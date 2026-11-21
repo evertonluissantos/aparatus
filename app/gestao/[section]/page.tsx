@@ -1,3 +1,5 @@
+import { listFreeTrials } from "@/lib/global-commercial";
+import { CommercialPanel } from "../commercial-panel";
 import { notFound } from "next/navigation";
 import { globalSections } from "../sections";
 import { OWNER_AUTH_ENABLED } from "@/lib/owner-auth-policy";
@@ -17,6 +19,13 @@ export default async function GlobalSection({
   if (!Object.hasOwn(globalSections, section)) notFound();
   if (!OWNER_AUTH_ENABLED)
     return <p>Gestão não ativada. Nenhum dado real disponível.</p>;
+  if (section === "aprovacoes") {
+    const [shops, trials] = await Promise.all([
+      listManagedShops(),
+      listFreeTrials(),
+    ]);
+    return <CommercialPanel shops={shops} trials={trials} />;
+  }
   if (section === "proprietarios")
     return <OwnersPanel owners={await listOwners()} />;
   if (section === "barbearias" || section === "ativacoes-suspensoes")

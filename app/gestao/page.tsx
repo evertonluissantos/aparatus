@@ -8,6 +8,11 @@ export default async function GlobalOverview() {
   const { totals: t, months } = await executiveReport();
   const cards = [
     [
+      "Aguardando aprovação",
+      t.pending,
+      "Solicitações pendentes de decisão administrativa",
+    ],
+    [
       "Recebido neste mês",
       money(t.monthReceived),
       "Pix confirmado · data de recebimento",

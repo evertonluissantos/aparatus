@@ -60,7 +60,7 @@ export async function publicCatalog(slug?: string) {
     throw new Error("INVALID_SLUG");
   const shops = await prisma.$queryRaw<
     { id: string }[]
-  >`SELECT "id" FROM "Barbershop" WHERE "published"=true AND "suspended"=false AND EXISTS (SELECT 1 FROM "BarbershopMembership" owner WHERE owner."barbershopId"="Barbershop"."id" AND owner."role"='OWNER' AND owner."active"=true) AND (${slug ?? null}::text IS NULL OR "slug"=${slug ?? null}) ORDER BY "name" LIMIT 100`;
+  >`SELECT "id" FROM "Barbershop" WHERE "published"=true AND "suspended"=false AND "approvalStatus"='APPROVED' AND EXISTS (SELECT 1 FROM "BarbershopMembership" owner WHERE owner."barbershopId"="Barbershop"."id" AND owner."role"='OWNER' AND owner."active"=true) AND (${slug ?? null}::text IS NULL OR "slug"=${slug ?? null}) ORDER BY "name" LIMIT 100`;
   return (
     await Promise.all(shops.map((s) => loadShop(prisma, s.id, true)))
   ).filter((s) => s !== null);
@@ -75,7 +75,7 @@ export async function available(input: unknown, staff = false) {
   else {
     const shops = await prisma.$queryRaw<
       { id: string }[]
-    >`SELECT "id" FROM "Barbershop" WHERE "id"=${data.barbershopId} AND "published"=true AND "suspended"=false AND EXISTS (SELECT 1 FROM "BarbershopMembership" owner WHERE owner."barbershopId"="Barbershop"."id" AND owner."role"='OWNER' AND owner."active"=true)`;
+    >`SELECT "id" FROM "Barbershop" WHERE "id"=${data.barbershopId} AND "published"=true AND "suspended"=false AND "approvalStatus"='APPROVED' AND EXISTS (SELECT 1 FROM "BarbershopMembership" owner WHERE owner."barbershopId"="Barbershop"."id" AND owner."role"='OWNER' AND owner."active"=true)`;
     if (!shops[0]) throw new Error("NOT_FOUND");
   }
   return calculateAvailability(

@@ -185,6 +185,9 @@ export type GlobalAdminWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   confirmedPixPayments?: Prisma.ManualPixPaymentListRelationFilter
   administrativeChanges?: Prisma.BarbershopAdministrationChangeListRelationFilter
+  grantedTrials?: Prisma.BarbershopFreeTrialListRelationFilter
+  updatedTrials?: Prisma.BarbershopFreeTrialListRelationFilter
+  commercialEvents?: Prisma.BarbershopCommercialEventListRelationFilter
 }
 
 export type GlobalAdminOrderByWithRelationInput = {
@@ -196,6 +199,9 @@ export type GlobalAdminOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   confirmedPixPayments?: Prisma.ManualPixPaymentOrderByRelationAggregateInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeOrderByRelationAggregateInput
+  grantedTrials?: Prisma.BarbershopFreeTrialOrderByRelationAggregateInput
+  updatedTrials?: Prisma.BarbershopFreeTrialOrderByRelationAggregateInput
+  commercialEvents?: Prisma.BarbershopCommercialEventOrderByRelationAggregateInput
 }
 
 export type GlobalAdminWhereUniqueInput = Prisma.AtLeast<{
@@ -210,6 +216,9 @@ export type GlobalAdminWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   confirmedPixPayments?: Prisma.ManualPixPaymentListRelationFilter
   administrativeChanges?: Prisma.BarbershopAdministrationChangeListRelationFilter
+  grantedTrials?: Prisma.BarbershopFreeTrialListRelationFilter
+  updatedTrials?: Prisma.BarbershopFreeTrialListRelationFilter
+  commercialEvents?: Prisma.BarbershopCommercialEventListRelationFilter
 }, "id" | "userId">
 
 export type GlobalAdminOrderByWithAggregationInput = {
@@ -242,6 +251,9 @@ export type GlobalAdminCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
   confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateInput = {
@@ -252,6 +264,9 @@ export type GlobalAdminUncheckedCreateInput = {
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUpdateInput = {
@@ -262,6 +277,9 @@ export type GlobalAdminUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
   confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateInput = {
@@ -272,6 +290,9 @@ export type GlobalAdminUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminCreateManyInput = {
@@ -391,6 +412,48 @@ export type GlobalAdminUpdateOneRequiredWithoutAdministrativeChangesNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.GlobalAdminUpdateToOneWithWhereWithoutAdministrativeChangesInput, Prisma.GlobalAdminUpdateWithoutAdministrativeChangesInput>, Prisma.GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput>
 }
 
+export type GlobalAdminCreateNestedOneWithoutGrantedTrialsInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutGrantedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutGrantedTrialsInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutGrantedTrialsInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+}
+
+export type GlobalAdminCreateNestedOneWithoutUpdatedTrialsInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutUpdatedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutUpdatedTrialsInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutUpdatedTrialsInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+}
+
+export type GlobalAdminUpdateOneRequiredWithoutGrantedTrialsNestedInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutGrantedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutGrantedTrialsInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutGrantedTrialsInput
+  upsert?: Prisma.GlobalAdminUpsertWithoutGrantedTrialsInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GlobalAdminUpdateToOneWithWhereWithoutGrantedTrialsInput, Prisma.GlobalAdminUpdateWithoutGrantedTrialsInput>, Prisma.GlobalAdminUncheckedUpdateWithoutGrantedTrialsInput>
+}
+
+export type GlobalAdminUpdateOneRequiredWithoutUpdatedTrialsNestedInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutUpdatedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutUpdatedTrialsInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutUpdatedTrialsInput
+  upsert?: Prisma.GlobalAdminUpsertWithoutUpdatedTrialsInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GlobalAdminUpdateToOneWithWhereWithoutUpdatedTrialsInput, Prisma.GlobalAdminUpdateWithoutUpdatedTrialsInput>, Prisma.GlobalAdminUncheckedUpdateWithoutUpdatedTrialsInput>
+}
+
+export type GlobalAdminCreateNestedOneWithoutCommercialEventsInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutCommercialEventsInput, Prisma.GlobalAdminUncheckedCreateWithoutCommercialEventsInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutCommercialEventsInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+}
+
+export type GlobalAdminUpdateOneRequiredWithoutCommercialEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.GlobalAdminCreateWithoutCommercialEventsInput, Prisma.GlobalAdminUncheckedCreateWithoutCommercialEventsInput>
+  connectOrCreate?: Prisma.GlobalAdminCreateOrConnectWithoutCommercialEventsInput
+  upsert?: Prisma.GlobalAdminUpsertWithoutCommercialEventsInput
+  connect?: Prisma.GlobalAdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GlobalAdminUpdateToOneWithWhereWithoutCommercialEventsInput, Prisma.GlobalAdminUpdateWithoutCommercialEventsInput>, Prisma.GlobalAdminUncheckedUpdateWithoutCommercialEventsInput>
+}
+
 export type GlobalAdminCreateWithoutUserInput = {
   id?: string
   active?: boolean
@@ -398,6 +461,9 @@ export type GlobalAdminCreateWithoutUserInput = {
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateWithoutUserInput = {
@@ -407,6 +473,9 @@ export type GlobalAdminUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminCreateOrConnectWithoutUserInput = {
@@ -432,6 +501,9 @@ export type GlobalAdminUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateWithoutUserInput = {
@@ -441,6 +513,9 @@ export type GlobalAdminUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminCreateWithoutConfirmedPixPaymentsInput = {
@@ -450,6 +525,9 @@ export type GlobalAdminCreateWithoutConfirmedPixPaymentsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateWithoutConfirmedPixPaymentsInput = {
@@ -459,6 +537,9 @@ export type GlobalAdminUncheckedCreateWithoutConfirmedPixPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminCreateOrConnectWithoutConfirmedPixPaymentsInput = {
@@ -484,6 +565,9 @@ export type GlobalAdminUpdateWithoutConfirmedPixPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateWithoutConfirmedPixPaymentsInput = {
@@ -493,6 +577,9 @@ export type GlobalAdminUncheckedUpdateWithoutConfirmedPixPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminCreateWithoutAdministrativeChangesInput = {
@@ -502,6 +589,9 @@ export type GlobalAdminCreateWithoutAdministrativeChangesInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
   confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+  grantedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput = {
@@ -511,6 +601,9 @@ export type GlobalAdminUncheckedCreateWithoutAdministrativeChangesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutGlobalAdminInput
 }
 
 export type GlobalAdminCreateOrConnectWithoutAdministrativeChangesInput = {
@@ -536,6 +629,9 @@ export type GlobalAdminUpdateWithoutAdministrativeChangesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
   confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutGlobalAdminNestedInput
 }
 
 export type GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput = {
@@ -545,6 +641,201 @@ export type GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutGlobalAdminNestedInput
+}
+
+export type GlobalAdminCreateWithoutGrantedTrialsInput = {
+  id?: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
+  updatedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutGlobalAdminInput
+}
+
+export type GlobalAdminUncheckedCreateWithoutGrantedTrialsInput = {
+  id?: string
+  userId: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutUpdatedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutGlobalAdminInput
+}
+
+export type GlobalAdminCreateOrConnectWithoutGrantedTrialsInput = {
+  where: Prisma.GlobalAdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutGrantedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutGrantedTrialsInput>
+}
+
+export type GlobalAdminCreateWithoutUpdatedTrialsInput = {
+  id?: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutGrantedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutGlobalAdminInput
+}
+
+export type GlobalAdminUncheckedCreateWithoutUpdatedTrialsInput = {
+  id?: string
+  userId: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutGrantedByInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutGlobalAdminInput
+}
+
+export type GlobalAdminCreateOrConnectWithoutUpdatedTrialsInput = {
+  where: Prisma.GlobalAdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutUpdatedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutUpdatedTrialsInput>
+}
+
+export type GlobalAdminUpsertWithoutGrantedTrialsInput = {
+  update: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutGrantedTrialsInput, Prisma.GlobalAdminUncheckedUpdateWithoutGrantedTrialsInput>
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutGrantedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutGrantedTrialsInput>
+  where?: Prisma.GlobalAdminWhereInput
+}
+
+export type GlobalAdminUpdateToOneWithWhereWithoutGrantedTrialsInput = {
+  where?: Prisma.GlobalAdminWhereInput
+  data: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutGrantedTrialsInput, Prisma.GlobalAdminUncheckedUpdateWithoutGrantedTrialsInput>
+}
+
+export type GlobalAdminUpdateWithoutGrantedTrialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutGlobalAdminNestedInput
+}
+
+export type GlobalAdminUncheckedUpdateWithoutGrantedTrialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutUpdatedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutGlobalAdminNestedInput
+}
+
+export type GlobalAdminUpsertWithoutUpdatedTrialsInput = {
+  update: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutUpdatedTrialsInput, Prisma.GlobalAdminUncheckedUpdateWithoutUpdatedTrialsInput>
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutUpdatedTrialsInput, Prisma.GlobalAdminUncheckedCreateWithoutUpdatedTrialsInput>
+  where?: Prisma.GlobalAdminWhereInput
+}
+
+export type GlobalAdminUpdateToOneWithWhereWithoutUpdatedTrialsInput = {
+  where?: Prisma.GlobalAdminWhereInput
+  data: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutUpdatedTrialsInput, Prisma.GlobalAdminUncheckedUpdateWithoutUpdatedTrialsInput>
+}
+
+export type GlobalAdminUpdateWithoutUpdatedTrialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutGrantedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutGlobalAdminNestedInput
+}
+
+export type GlobalAdminUncheckedUpdateWithoutUpdatedTrialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutGrantedByNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutGlobalAdminNestedInput
+}
+
+export type GlobalAdminCreateWithoutCommercialEventsInput = {
+  id?: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutGlobalAdminInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutUpdatedByInput
+}
+
+export type GlobalAdminUncheckedCreateWithoutCommercialEventsInput = {
+  id?: string
+  userId: string
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutConfirmedByInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutGlobalAdminInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutGrantedByInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type GlobalAdminCreateOrConnectWithoutCommercialEventsInput = {
+  where: Prisma.GlobalAdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutCommercialEventsInput, Prisma.GlobalAdminUncheckedCreateWithoutCommercialEventsInput>
+}
+
+export type GlobalAdminUpsertWithoutCommercialEventsInput = {
+  update: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutCommercialEventsInput, Prisma.GlobalAdminUncheckedUpdateWithoutCommercialEventsInput>
+  create: Prisma.XOR<Prisma.GlobalAdminCreateWithoutCommercialEventsInput, Prisma.GlobalAdminUncheckedCreateWithoutCommercialEventsInput>
+  where?: Prisma.GlobalAdminWhereInput
+}
+
+export type GlobalAdminUpdateToOneWithWhereWithoutCommercialEventsInput = {
+  where?: Prisma.GlobalAdminWhereInput
+  data: Prisma.XOR<Prisma.GlobalAdminUpdateWithoutCommercialEventsInput, Prisma.GlobalAdminUncheckedUpdateWithoutCommercialEventsInput>
+}
+
+export type GlobalAdminUpdateWithoutCommercialEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutGlobalAdminNestedInput
+  confirmedPixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type GlobalAdminUncheckedUpdateWithoutCommercialEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmedPixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutConfirmedByNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutGlobalAdminNestedInput
+  grantedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutGrantedByNestedInput
+  updatedTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 
@@ -555,11 +846,17 @@ export type GlobalAdminUncheckedUpdateWithoutAdministrativeChangesInput = {
 export type GlobalAdminCountOutputType = {
   confirmedPixPayments: number
   administrativeChanges: number
+  grantedTrials: number
+  updatedTrials: number
+  commercialEvents: number
 }
 
 export type GlobalAdminCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   confirmedPixPayments?: boolean | GlobalAdminCountOutputTypeCountConfirmedPixPaymentsArgs
   administrativeChanges?: boolean | GlobalAdminCountOutputTypeCountAdministrativeChangesArgs
+  grantedTrials?: boolean | GlobalAdminCountOutputTypeCountGrantedTrialsArgs
+  updatedTrials?: boolean | GlobalAdminCountOutputTypeCountUpdatedTrialsArgs
+  commercialEvents?: boolean | GlobalAdminCountOutputTypeCountCommercialEventsArgs
 }
 
 /**
@@ -586,6 +883,27 @@ export type GlobalAdminCountOutputTypeCountAdministrativeChangesArgs<ExtArgs ext
   where?: Prisma.BarbershopAdministrationChangeWhereInput
 }
 
+/**
+ * GlobalAdminCountOutputType without action
+ */
+export type GlobalAdminCountOutputTypeCountGrantedTrialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarbershopFreeTrialWhereInput
+}
+
+/**
+ * GlobalAdminCountOutputType without action
+ */
+export type GlobalAdminCountOutputTypeCountUpdatedTrialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarbershopFreeTrialWhereInput
+}
+
+/**
+ * GlobalAdminCountOutputType without action
+ */
+export type GlobalAdminCountOutputTypeCountCommercialEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarbershopCommercialEventWhereInput
+}
+
 
 export type GlobalAdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -596,6 +914,9 @@ export type GlobalAdminSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   confirmedPixPayments?: boolean | Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs>
   administrativeChanges?: boolean | Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs>
+  grantedTrials?: boolean | Prisma.GlobalAdmin$grantedTrialsArgs<ExtArgs>
+  updatedTrials?: boolean | Prisma.GlobalAdmin$updatedTrialsArgs<ExtArgs>
+  commercialEvents?: boolean | Prisma.GlobalAdmin$commercialEventsArgs<ExtArgs>
   _count?: boolean | Prisma.GlobalAdminCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["globalAdmin"]>
 
@@ -630,6 +951,9 @@ export type GlobalAdminInclude<ExtArgs extends runtime.Types.Extensions.Internal
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   confirmedPixPayments?: boolean | Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs>
   administrativeChanges?: boolean | Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs>
+  grantedTrials?: boolean | Prisma.GlobalAdmin$grantedTrialsArgs<ExtArgs>
+  updatedTrials?: boolean | Prisma.GlobalAdmin$updatedTrialsArgs<ExtArgs>
+  commercialEvents?: boolean | Prisma.GlobalAdmin$commercialEventsArgs<ExtArgs>
   _count?: boolean | Prisma.GlobalAdminCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GlobalAdminIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -645,6 +969,9 @@ export type $GlobalAdminPayload<ExtArgs extends runtime.Types.Extensions.Interna
     user: Prisma.$UserPayload<ExtArgs>
     confirmedPixPayments: Prisma.$ManualPixPaymentPayload<ExtArgs>[]
     administrativeChanges: Prisma.$BarbershopAdministrationChangePayload<ExtArgs>[]
+    grantedTrials: Prisma.$BarbershopFreeTrialPayload<ExtArgs>[]
+    updatedTrials: Prisma.$BarbershopFreeTrialPayload<ExtArgs>[]
+    commercialEvents: Prisma.$BarbershopCommercialEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1049,6 +1376,9 @@ export interface Prisma__GlobalAdminClient<T, Null = never, ExtArgs extends runt
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   confirmedPixPayments<T extends Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$confirmedPixPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManualPixPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   administrativeChanges<T extends Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$administrativeChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopAdministrationChangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  grantedTrials<T extends Prisma.GlobalAdmin$grantedTrialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$grantedTrialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopFreeTrialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedTrials<T extends Prisma.GlobalAdmin$updatedTrialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$updatedTrialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopFreeTrialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  commercialEvents<T extends Prisma.GlobalAdmin$commercialEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GlobalAdmin$commercialEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopCommercialEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1524,6 +1854,78 @@ export type GlobalAdmin$administrativeChangesArgs<ExtArgs extends runtime.Types.
   take?: number
   skip?: number
   distinct?: Prisma.BarbershopAdministrationChangeScalarFieldEnum | Prisma.BarbershopAdministrationChangeScalarFieldEnum[]
+}
+
+/**
+ * GlobalAdmin.grantedTrials
+ */
+export type GlobalAdmin$grantedTrialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopFreeTrial
+   */
+  select?: Prisma.BarbershopFreeTrialSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarbershopFreeTrial
+   */
+  omit?: Prisma.BarbershopFreeTrialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarbershopFreeTrialInclude<ExtArgs> | null
+  where?: Prisma.BarbershopFreeTrialWhereInput
+  orderBy?: Prisma.BarbershopFreeTrialOrderByWithRelationInput | Prisma.BarbershopFreeTrialOrderByWithRelationInput[]
+  cursor?: Prisma.BarbershopFreeTrialWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarbershopFreeTrialScalarFieldEnum | Prisma.BarbershopFreeTrialScalarFieldEnum[]
+}
+
+/**
+ * GlobalAdmin.updatedTrials
+ */
+export type GlobalAdmin$updatedTrialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopFreeTrial
+   */
+  select?: Prisma.BarbershopFreeTrialSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarbershopFreeTrial
+   */
+  omit?: Prisma.BarbershopFreeTrialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarbershopFreeTrialInclude<ExtArgs> | null
+  where?: Prisma.BarbershopFreeTrialWhereInput
+  orderBy?: Prisma.BarbershopFreeTrialOrderByWithRelationInput | Prisma.BarbershopFreeTrialOrderByWithRelationInput[]
+  cursor?: Prisma.BarbershopFreeTrialWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarbershopFreeTrialScalarFieldEnum | Prisma.BarbershopFreeTrialScalarFieldEnum[]
+}
+
+/**
+ * GlobalAdmin.commercialEvents
+ */
+export type GlobalAdmin$commercialEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopCommercialEvent
+   */
+  select?: Prisma.BarbershopCommercialEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarbershopCommercialEvent
+   */
+  omit?: Prisma.BarbershopCommercialEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarbershopCommercialEventInclude<ExtArgs> | null
+  where?: Prisma.BarbershopCommercialEventWhereInput
+  orderBy?: Prisma.BarbershopCommercialEventOrderByWithRelationInput | Prisma.BarbershopCommercialEventOrderByWithRelationInput[]
+  cursor?: Prisma.BarbershopCommercialEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarbershopCommercialEventScalarFieldEnum | Prisma.BarbershopCommercialEventScalarFieldEnum[]
 }
 
 /**

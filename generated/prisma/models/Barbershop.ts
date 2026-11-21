@@ -33,6 +33,7 @@ export type BarbershopMinAggregateOutputType = {
   slug: string | null
   published: boolean | null
   suspended: boolean | null
+  approvalStatus: $Enums.BarbershopApprovalStatus | null
   timeZone: string | null
 }
 
@@ -45,6 +46,7 @@ export type BarbershopMaxAggregateOutputType = {
   slug: string | null
   published: boolean | null
   suspended: boolean | null
+  approvalStatus: $Enums.BarbershopApprovalStatus | null
   timeZone: string | null
 }
 
@@ -57,6 +59,7 @@ export type BarbershopCountAggregateOutputType = {
   slug: number
   published: number
   suspended: number
+  approvalStatus: number
   phones: number
   timeZone: number
   _all: number
@@ -72,6 +75,7 @@ export type BarbershopMinAggregateInputType = {
   slug?: true
   published?: true
   suspended?: true
+  approvalStatus?: true
   timeZone?: true
 }
 
@@ -84,6 +88,7 @@ export type BarbershopMaxAggregateInputType = {
   slug?: true
   published?: true
   suspended?: true
+  approvalStatus?: true
   timeZone?: true
 }
 
@@ -96,6 +101,7 @@ export type BarbershopCountAggregateInputType = {
   slug?: true
   published?: true
   suspended?: true
+  approvalStatus?: true
   phones?: true
   timeZone?: true
   _all?: true
@@ -182,6 +188,7 @@ export type BarbershopGroupByOutputType = {
   slug: string | null
   published: boolean
   suspended: boolean
+  approvalStatus: $Enums.BarbershopApprovalStatus
   phones: string[]
   timeZone: string | null
   _count: BarbershopCountAggregateOutputType | null
@@ -216,8 +223,11 @@ export type BarbershopWhereInput = {
   slug?: Prisma.StringNullableFilter<"Barbershop"> | string | null
   published?: Prisma.BoolFilter<"Barbershop"> | boolean
   suspended?: Prisma.BoolFilter<"Barbershop"> | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFilter<"Barbershop"> | $Enums.BarbershopApprovalStatus
   phones?: Prisma.StringNullableListFilter<"Barbershop">
   timeZone?: Prisma.StringNullableFilter<"Barbershop"> | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialListRelationFilter
+  commercialEvents?: Prisma.BarbershopCommercialEventListRelationFilter
   administrativeChanges?: Prisma.BarbershopAdministrationChangeListRelationFilter
   services?: Prisma.BarbershopServiceListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
@@ -239,8 +249,11 @@ export type BarbershopOrderByWithRelationInput = {
   slug?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   suspended?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
   phones?: Prisma.SortOrder
   timeZone?: Prisma.SortOrderInput | Prisma.SortOrder
+  freeTrials?: Prisma.BarbershopFreeTrialOrderByRelationAggregateInput
+  commercialEvents?: Prisma.BarbershopCommercialEventOrderByRelationAggregateInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeOrderByRelationAggregateInput
   services?: Prisma.BarbershopServiceOrderByRelationAggregateInput
   bookings?: Prisma.BookingOrderByRelationAggregateInput
@@ -265,8 +278,11 @@ export type BarbershopWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringFilter<"Barbershop"> | string
   published?: Prisma.BoolFilter<"Barbershop"> | boolean
   suspended?: Prisma.BoolFilter<"Barbershop"> | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFilter<"Barbershop"> | $Enums.BarbershopApprovalStatus
   phones?: Prisma.StringNullableListFilter<"Barbershop">
   timeZone?: Prisma.StringNullableFilter<"Barbershop"> | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialListRelationFilter
+  commercialEvents?: Prisma.BarbershopCommercialEventListRelationFilter
   administrativeChanges?: Prisma.BarbershopAdministrationChangeListRelationFilter
   services?: Prisma.BarbershopServiceListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
@@ -288,6 +304,7 @@ export type BarbershopOrderByWithAggregationInput = {
   slug?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   suspended?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
   phones?: Prisma.SortOrder
   timeZone?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BarbershopCountOrderByAggregateInput
@@ -307,6 +324,7 @@ export type BarbershopScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringNullableWithAggregatesFilter<"Barbershop"> | string | null
   published?: Prisma.BoolWithAggregatesFilter<"Barbershop"> | boolean
   suspended?: Prisma.BoolWithAggregatesFilter<"Barbershop"> | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusWithAggregatesFilter<"Barbershop"> | $Enums.BarbershopApprovalStatus
   phones?: Prisma.StringNullableListFilter<"Barbershop">
   timeZone?: Prisma.StringNullableWithAggregatesFilter<"Barbershop"> | string | null
 }
@@ -320,8 +338,11 @@ export type BarbershopCreateInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -343,8 +364,11 @@ export type BarbershopUncheckedCreateInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -366,8 +390,11 @@ export type BarbershopUpdateInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -389,8 +416,11 @@ export type BarbershopUncheckedUpdateInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -412,6 +442,7 @@ export type BarbershopCreateManyInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
 }
@@ -425,6 +456,7 @@ export type BarbershopUpdateManyMutationInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -438,6 +470,7 @@ export type BarbershopUncheckedUpdateManyInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -459,6 +492,7 @@ export type BarbershopCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   published?: Prisma.SortOrder
   suspended?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
   phones?: Prisma.SortOrder
   timeZone?: Prisma.SortOrder
 }
@@ -472,6 +506,7 @@ export type BarbershopMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   published?: Prisma.SortOrder
   suspended?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
   timeZone?: Prisma.SortOrder
 }
 
@@ -484,6 +519,7 @@ export type BarbershopMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   published?: Prisma.SortOrder
   suspended?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
   timeZone?: Prisma.SortOrder
 }
 
@@ -506,6 +542,10 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type EnumBarbershopApprovalStatusFieldUpdateOperationsInput = {
+  set?: $Enums.BarbershopApprovalStatus
 }
 
 export type BarbershopUpdatephonesInput = {
@@ -653,6 +693,34 @@ export type BarbershopUpdateOneRequiredWithoutAdministrativeChangesNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.BarbershopUpdateToOneWithWhereWithoutAdministrativeChangesInput, Prisma.BarbershopUpdateWithoutAdministrativeChangesInput>, Prisma.BarbershopUncheckedUpdateWithoutAdministrativeChangesInput>
 }
 
+export type BarbershopCreateNestedOneWithoutFreeTrialsInput = {
+  create?: Prisma.XOR<Prisma.BarbershopCreateWithoutFreeTrialsInput, Prisma.BarbershopUncheckedCreateWithoutFreeTrialsInput>
+  connectOrCreate?: Prisma.BarbershopCreateOrConnectWithoutFreeTrialsInput
+  connect?: Prisma.BarbershopWhereUniqueInput
+}
+
+export type BarbershopUpdateOneRequiredWithoutFreeTrialsNestedInput = {
+  create?: Prisma.XOR<Prisma.BarbershopCreateWithoutFreeTrialsInput, Prisma.BarbershopUncheckedCreateWithoutFreeTrialsInput>
+  connectOrCreate?: Prisma.BarbershopCreateOrConnectWithoutFreeTrialsInput
+  upsert?: Prisma.BarbershopUpsertWithoutFreeTrialsInput
+  connect?: Prisma.BarbershopWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BarbershopUpdateToOneWithWhereWithoutFreeTrialsInput, Prisma.BarbershopUpdateWithoutFreeTrialsInput>, Prisma.BarbershopUncheckedUpdateWithoutFreeTrialsInput>
+}
+
+export type BarbershopCreateNestedOneWithoutCommercialEventsInput = {
+  create?: Prisma.XOR<Prisma.BarbershopCreateWithoutCommercialEventsInput, Prisma.BarbershopUncheckedCreateWithoutCommercialEventsInput>
+  connectOrCreate?: Prisma.BarbershopCreateOrConnectWithoutCommercialEventsInput
+  connect?: Prisma.BarbershopWhereUniqueInput
+}
+
+export type BarbershopUpdateOneRequiredWithoutCommercialEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.BarbershopCreateWithoutCommercialEventsInput, Prisma.BarbershopUncheckedCreateWithoutCommercialEventsInput>
+  connectOrCreate?: Prisma.BarbershopCreateOrConnectWithoutCommercialEventsInput
+  upsert?: Prisma.BarbershopUpsertWithoutCommercialEventsInput
+  connect?: Prisma.BarbershopWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BarbershopUpdateToOneWithWhereWithoutCommercialEventsInput, Prisma.BarbershopUpdateWithoutCommercialEventsInput>, Prisma.BarbershopUncheckedUpdateWithoutCommercialEventsInput>
+}
+
 export type BarbershopCreateWithoutServicesInput = {
   id?: string
   name: string
@@ -662,8 +730,11 @@ export type BarbershopCreateWithoutServicesInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
   professionals?: Prisma.ProfessionalCreateNestedManyWithoutBarbershopInput
@@ -684,8 +755,11 @@ export type BarbershopUncheckedCreateWithoutServicesInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
   professionals?: Prisma.ProfessionalUncheckedCreateNestedManyWithoutBarbershopInput
@@ -722,8 +796,11 @@ export type BarbershopUpdateWithoutServicesInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
   professionals?: Prisma.ProfessionalUpdateManyWithoutBarbershopNestedInput
@@ -744,8 +821,11 @@ export type BarbershopUncheckedUpdateWithoutServicesInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
   professionals?: Prisma.ProfessionalUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -766,8 +846,11 @@ export type BarbershopCreateWithoutBookingsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   professionals?: Prisma.ProfessionalCreateNestedManyWithoutBarbershopInput
@@ -788,8 +871,11 @@ export type BarbershopUncheckedCreateWithoutBookingsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   professionals?: Prisma.ProfessionalUncheckedCreateNestedManyWithoutBarbershopInput
@@ -826,8 +912,11 @@ export type BarbershopUpdateWithoutBookingsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   professionals?: Prisma.ProfessionalUpdateManyWithoutBarbershopNestedInput
@@ -848,8 +937,11 @@ export type BarbershopUncheckedUpdateWithoutBookingsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   professionals?: Prisma.ProfessionalUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -870,8 +962,11 @@ export type BarbershopCreateWithoutProfessionalsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -892,8 +987,11 @@ export type BarbershopUncheckedCreateWithoutProfessionalsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -930,8 +1028,11 @@ export type BarbershopUpdateWithoutProfessionalsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -952,8 +1053,11 @@ export type BarbershopUncheckedUpdateWithoutProfessionalsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -974,8 +1078,11 @@ export type BarbershopCreateWithoutWorkingHoursInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -996,8 +1103,11 @@ export type BarbershopUncheckedCreateWithoutWorkingHoursInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1034,8 +1144,11 @@ export type BarbershopUpdateWithoutWorkingHoursInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -1056,8 +1169,11 @@ export type BarbershopUncheckedUpdateWithoutWorkingHoursInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1078,8 +1194,11 @@ export type BarbershopCreateWithoutScheduleBlocksInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -1100,8 +1219,11 @@ export type BarbershopUncheckedCreateWithoutScheduleBlocksInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1138,8 +1260,11 @@ export type BarbershopUpdateWithoutScheduleBlocksInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -1160,8 +1285,11 @@ export type BarbershopUncheckedUpdateWithoutScheduleBlocksInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1182,8 +1310,11 @@ export type BarbershopCreateWithoutMembershipsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -1204,8 +1335,11 @@ export type BarbershopUncheckedCreateWithoutMembershipsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1242,8 +1376,11 @@ export type BarbershopUpdateWithoutMembershipsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -1264,8 +1401,11 @@ export type BarbershopUncheckedUpdateWithoutMembershipsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1286,8 +1426,11 @@ export type BarbershopCreateWithoutPixPaymentsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -1308,8 +1451,11 @@ export type BarbershopUncheckedCreateWithoutPixPaymentsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1346,8 +1492,11 @@ export type BarbershopUpdateWithoutPixPaymentsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -1368,8 +1517,11 @@ export type BarbershopUncheckedUpdateWithoutPixPaymentsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1390,8 +1542,11 @@ export type BarbershopCreateWithoutBookingCommandsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -1412,8 +1567,11 @@ export type BarbershopUncheckedCreateWithoutBookingCommandsInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1450,8 +1608,11 @@ export type BarbershopUpdateWithoutBookingCommandsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -1472,8 +1633,11 @@ export type BarbershopUncheckedUpdateWithoutBookingCommandsInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1494,8 +1658,11 @@ export type BarbershopCreateWithoutCustomersInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
@@ -1516,8 +1683,11 @@ export type BarbershopUncheckedCreateWithoutCustomersInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1554,8 +1724,11 @@ export type BarbershopUpdateWithoutCustomersInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
@@ -1576,8 +1749,11 @@ export type BarbershopUncheckedUpdateWithoutCustomersInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
   administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1598,8 +1774,11 @@ export type BarbershopCreateWithoutAdministrativeChangesInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
   professionals?: Prisma.ProfessionalCreateNestedManyWithoutBarbershopInput
@@ -1620,8 +1799,11 @@ export type BarbershopUncheckedCreateWithoutAdministrativeChangesInput = {
   slug?: string | null
   published?: boolean
   suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopCreatephonesInput | string[]
   timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
   services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
   professionals?: Prisma.ProfessionalUncheckedCreateNestedManyWithoutBarbershopInput
@@ -1658,8 +1840,11 @@ export type BarbershopUpdateWithoutAdministrativeChangesInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
   professionals?: Prisma.ProfessionalUpdateManyWithoutBarbershopNestedInput
@@ -1680,8 +1865,243 @@ export type BarbershopUncheckedUpdateWithoutAdministrativeChangesInput = {
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
   phones?: Prisma.BarbershopUpdatephonesInput | string[]
   timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
+  services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
+  professionals?: Prisma.ProfessionalUncheckedUpdateManyWithoutBarbershopNestedInput
+  workingHours?: Prisma.WorkingHoursUncheckedUpdateManyWithoutBarbershopNestedInput
+  scheduleBlocks?: Prisma.ScheduleBlockUncheckedUpdateManyWithoutBarbershopNestedInput
+  memberships?: Prisma.BarbershopMembershipUncheckedUpdateManyWithoutBarbershopNestedInput
+  bookingCommands?: Prisma.BookingCommandUncheckedUpdateManyWithoutBarbershopNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutBarbershopNestedInput
+  pixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutBarbershopNestedInput
+}
+
+export type BarbershopCreateWithoutFreeTrialsInput = {
+  id?: string
+  name: string
+  address: string
+  description: string
+  imageUrl: string
+  slug?: string | null
+  published?: boolean
+  suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopCreatephonesInput | string[]
+  timeZone?: string | null
+  commercialEvents?: Prisma.BarbershopCommercialEventCreateNestedManyWithoutBarbershopInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
+  services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
+  professionals?: Prisma.ProfessionalCreateNestedManyWithoutBarbershopInput
+  workingHours?: Prisma.WorkingHoursCreateNestedManyWithoutBarbershopInput
+  scheduleBlocks?: Prisma.ScheduleBlockCreateNestedManyWithoutBarbershopInput
+  memberships?: Prisma.BarbershopMembershipCreateNestedManyWithoutBarbershopInput
+  bookingCommands?: Prisma.BookingCommandCreateNestedManyWithoutBarbershopInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutBarbershopInput
+  pixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutBarbershopInput
+}
+
+export type BarbershopUncheckedCreateWithoutFreeTrialsInput = {
+  id?: string
+  name: string
+  address: string
+  description: string
+  imageUrl: string
+  slug?: string | null
+  published?: boolean
+  suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopCreatephonesInput | string[]
+  timeZone?: string | null
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedCreateNestedManyWithoutBarbershopInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
+  services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
+  professionals?: Prisma.ProfessionalUncheckedCreateNestedManyWithoutBarbershopInput
+  workingHours?: Prisma.WorkingHoursUncheckedCreateNestedManyWithoutBarbershopInput
+  scheduleBlocks?: Prisma.ScheduleBlockUncheckedCreateNestedManyWithoutBarbershopInput
+  memberships?: Prisma.BarbershopMembershipUncheckedCreateNestedManyWithoutBarbershopInput
+  bookingCommands?: Prisma.BookingCommandUncheckedCreateNestedManyWithoutBarbershopInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutBarbershopInput
+  pixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutBarbershopInput
+}
+
+export type BarbershopCreateOrConnectWithoutFreeTrialsInput = {
+  where: Prisma.BarbershopWhereUniqueInput
+  create: Prisma.XOR<Prisma.BarbershopCreateWithoutFreeTrialsInput, Prisma.BarbershopUncheckedCreateWithoutFreeTrialsInput>
+}
+
+export type BarbershopUpsertWithoutFreeTrialsInput = {
+  update: Prisma.XOR<Prisma.BarbershopUpdateWithoutFreeTrialsInput, Prisma.BarbershopUncheckedUpdateWithoutFreeTrialsInput>
+  create: Prisma.XOR<Prisma.BarbershopCreateWithoutFreeTrialsInput, Prisma.BarbershopUncheckedCreateWithoutFreeTrialsInput>
+  where?: Prisma.BarbershopWhereInput
+}
+
+export type BarbershopUpdateToOneWithWhereWithoutFreeTrialsInput = {
+  where?: Prisma.BarbershopWhereInput
+  data: Prisma.XOR<Prisma.BarbershopUpdateWithoutFreeTrialsInput, Prisma.BarbershopUncheckedUpdateWithoutFreeTrialsInput>
+}
+
+export type BarbershopUpdateWithoutFreeTrialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopUpdatephonesInput | string[]
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEvents?: Prisma.BarbershopCommercialEventUpdateManyWithoutBarbershopNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
+  services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
+  professionals?: Prisma.ProfessionalUpdateManyWithoutBarbershopNestedInput
+  workingHours?: Prisma.WorkingHoursUpdateManyWithoutBarbershopNestedInput
+  scheduleBlocks?: Prisma.ScheduleBlockUpdateManyWithoutBarbershopNestedInput
+  memberships?: Prisma.BarbershopMembershipUpdateManyWithoutBarbershopNestedInput
+  bookingCommands?: Prisma.BookingCommandUpdateManyWithoutBarbershopNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutBarbershopNestedInput
+  pixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutBarbershopNestedInput
+}
+
+export type BarbershopUncheckedUpdateWithoutFreeTrialsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopUpdatephonesInput | string[]
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEvents?: Prisma.BarbershopCommercialEventUncheckedUpdateManyWithoutBarbershopNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
+  services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
+  professionals?: Prisma.ProfessionalUncheckedUpdateManyWithoutBarbershopNestedInput
+  workingHours?: Prisma.WorkingHoursUncheckedUpdateManyWithoutBarbershopNestedInput
+  scheduleBlocks?: Prisma.ScheduleBlockUncheckedUpdateManyWithoutBarbershopNestedInput
+  memberships?: Prisma.BarbershopMembershipUncheckedUpdateManyWithoutBarbershopNestedInput
+  bookingCommands?: Prisma.BookingCommandUncheckedUpdateManyWithoutBarbershopNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutBarbershopNestedInput
+  pixPayments?: Prisma.ManualPixPaymentUncheckedUpdateManyWithoutBarbershopNestedInput
+}
+
+export type BarbershopCreateWithoutCommercialEventsInput = {
+  id?: string
+  name: string
+  address: string
+  description: string
+  imageUrl: string
+  slug?: string | null
+  published?: boolean
+  suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopCreatephonesInput | string[]
+  timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialCreateNestedManyWithoutBarbershopInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeCreateNestedManyWithoutBarbershopInput
+  services?: Prisma.BarbershopServiceCreateNestedManyWithoutBarbershopInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBarbershopInput
+  professionals?: Prisma.ProfessionalCreateNestedManyWithoutBarbershopInput
+  workingHours?: Prisma.WorkingHoursCreateNestedManyWithoutBarbershopInput
+  scheduleBlocks?: Prisma.ScheduleBlockCreateNestedManyWithoutBarbershopInput
+  memberships?: Prisma.BarbershopMembershipCreateNestedManyWithoutBarbershopInput
+  bookingCommands?: Prisma.BookingCommandCreateNestedManyWithoutBarbershopInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutBarbershopInput
+  pixPayments?: Prisma.ManualPixPaymentCreateNestedManyWithoutBarbershopInput
+}
+
+export type BarbershopUncheckedCreateWithoutCommercialEventsInput = {
+  id?: string
+  name: string
+  address: string
+  description: string
+  imageUrl: string
+  slug?: string | null
+  published?: boolean
+  suspended?: boolean
+  approvalStatus?: $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopCreatephonesInput | string[]
+  timeZone?: string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedCreateNestedManyWithoutBarbershopInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedCreateNestedManyWithoutBarbershopInput
+  services?: Prisma.BarbershopServiceUncheckedCreateNestedManyWithoutBarbershopInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBarbershopInput
+  professionals?: Prisma.ProfessionalUncheckedCreateNestedManyWithoutBarbershopInput
+  workingHours?: Prisma.WorkingHoursUncheckedCreateNestedManyWithoutBarbershopInput
+  scheduleBlocks?: Prisma.ScheduleBlockUncheckedCreateNestedManyWithoutBarbershopInput
+  memberships?: Prisma.BarbershopMembershipUncheckedCreateNestedManyWithoutBarbershopInput
+  bookingCommands?: Prisma.BookingCommandUncheckedCreateNestedManyWithoutBarbershopInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutBarbershopInput
+  pixPayments?: Prisma.ManualPixPaymentUncheckedCreateNestedManyWithoutBarbershopInput
+}
+
+export type BarbershopCreateOrConnectWithoutCommercialEventsInput = {
+  where: Prisma.BarbershopWhereUniqueInput
+  create: Prisma.XOR<Prisma.BarbershopCreateWithoutCommercialEventsInput, Prisma.BarbershopUncheckedCreateWithoutCommercialEventsInput>
+}
+
+export type BarbershopUpsertWithoutCommercialEventsInput = {
+  update: Prisma.XOR<Prisma.BarbershopUpdateWithoutCommercialEventsInput, Prisma.BarbershopUncheckedUpdateWithoutCommercialEventsInput>
+  create: Prisma.XOR<Prisma.BarbershopCreateWithoutCommercialEventsInput, Prisma.BarbershopUncheckedCreateWithoutCommercialEventsInput>
+  where?: Prisma.BarbershopWhereInput
+}
+
+export type BarbershopUpdateToOneWithWhereWithoutCommercialEventsInput = {
+  where?: Prisma.BarbershopWhereInput
+  data: Prisma.XOR<Prisma.BarbershopUpdateWithoutCommercialEventsInput, Prisma.BarbershopUncheckedUpdateWithoutCommercialEventsInput>
+}
+
+export type BarbershopUpdateWithoutCommercialEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopUpdatephonesInput | string[]
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUpdateManyWithoutBarbershopNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUpdateManyWithoutBarbershopNestedInput
+  services?: Prisma.BarbershopServiceUpdateManyWithoutBarbershopNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBarbershopNestedInput
+  professionals?: Prisma.ProfessionalUpdateManyWithoutBarbershopNestedInput
+  workingHours?: Prisma.WorkingHoursUpdateManyWithoutBarbershopNestedInput
+  scheduleBlocks?: Prisma.ScheduleBlockUpdateManyWithoutBarbershopNestedInput
+  memberships?: Prisma.BarbershopMembershipUpdateManyWithoutBarbershopNestedInput
+  bookingCommands?: Prisma.BookingCommandUpdateManyWithoutBarbershopNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutBarbershopNestedInput
+  pixPayments?: Prisma.ManualPixPaymentUpdateManyWithoutBarbershopNestedInput
+}
+
+export type BarbershopUncheckedUpdateWithoutCommercialEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  suspended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvalStatus?: Prisma.EnumBarbershopApprovalStatusFieldUpdateOperationsInput | $Enums.BarbershopApprovalStatus
+  phones?: Prisma.BarbershopUpdatephonesInput | string[]
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  freeTrials?: Prisma.BarbershopFreeTrialUncheckedUpdateManyWithoutBarbershopNestedInput
+  administrativeChanges?: Prisma.BarbershopAdministrationChangeUncheckedUpdateManyWithoutBarbershopNestedInput
   services?: Prisma.BarbershopServiceUncheckedUpdateManyWithoutBarbershopNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBarbershopNestedInput
   professionals?: Prisma.ProfessionalUncheckedUpdateManyWithoutBarbershopNestedInput
@@ -1699,6 +2119,8 @@ export type BarbershopUncheckedUpdateWithoutAdministrativeChangesInput = {
  */
 
 export type BarbershopCountOutputType = {
+  freeTrials: number
+  commercialEvents: number
   administrativeChanges: number
   services: number
   bookings: number
@@ -1712,6 +2134,8 @@ export type BarbershopCountOutputType = {
 }
 
 export type BarbershopCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  freeTrials?: boolean | BarbershopCountOutputTypeCountFreeTrialsArgs
+  commercialEvents?: boolean | BarbershopCountOutputTypeCountCommercialEventsArgs
   administrativeChanges?: boolean | BarbershopCountOutputTypeCountAdministrativeChangesArgs
   services?: boolean | BarbershopCountOutputTypeCountServicesArgs
   bookings?: boolean | BarbershopCountOutputTypeCountBookingsArgs
@@ -1732,6 +2156,20 @@ export type BarbershopCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the BarbershopCountOutputType
    */
   select?: Prisma.BarbershopCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BarbershopCountOutputType without action
+ */
+export type BarbershopCountOutputTypeCountFreeTrialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarbershopFreeTrialWhereInput
+}
+
+/**
+ * BarbershopCountOutputType without action
+ */
+export type BarbershopCountOutputTypeCountCommercialEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarbershopCommercialEventWhereInput
 }
 
 /**
@@ -1814,8 +2252,11 @@ export type BarbershopSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   slug?: boolean
   published?: boolean
   suspended?: boolean
+  approvalStatus?: boolean
   phones?: boolean
   timeZone?: boolean
+  freeTrials?: boolean | Prisma.Barbershop$freeTrialsArgs<ExtArgs>
+  commercialEvents?: boolean | Prisma.Barbershop$commercialEventsArgs<ExtArgs>
   administrativeChanges?: boolean | Prisma.Barbershop$administrativeChangesArgs<ExtArgs>
   services?: boolean | Prisma.Barbershop$servicesArgs<ExtArgs>
   bookings?: boolean | Prisma.Barbershop$bookingsArgs<ExtArgs>
@@ -1838,6 +2279,7 @@ export type BarbershopSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   slug?: boolean
   published?: boolean
   suspended?: boolean
+  approvalStatus?: boolean
   phones?: boolean
   timeZone?: boolean
 }, ExtArgs["result"]["barbershop"]>
@@ -1851,6 +2293,7 @@ export type BarbershopSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   slug?: boolean
   published?: boolean
   suspended?: boolean
+  approvalStatus?: boolean
   phones?: boolean
   timeZone?: boolean
 }, ExtArgs["result"]["barbershop"]>
@@ -1864,12 +2307,15 @@ export type BarbershopSelectScalar = {
   slug?: boolean
   published?: boolean
   suspended?: boolean
+  approvalStatus?: boolean
   phones?: boolean
   timeZone?: boolean
 }
 
-export type BarbershopOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address" | "description" | "imageUrl" | "slug" | "published" | "suspended" | "phones" | "timeZone", ExtArgs["result"]["barbershop"]>
+export type BarbershopOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address" | "description" | "imageUrl" | "slug" | "published" | "suspended" | "approvalStatus" | "phones" | "timeZone", ExtArgs["result"]["barbershop"]>
 export type BarbershopInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  freeTrials?: boolean | Prisma.Barbershop$freeTrialsArgs<ExtArgs>
+  commercialEvents?: boolean | Prisma.Barbershop$commercialEventsArgs<ExtArgs>
   administrativeChanges?: boolean | Prisma.Barbershop$administrativeChangesArgs<ExtArgs>
   services?: boolean | Prisma.Barbershop$servicesArgs<ExtArgs>
   bookings?: boolean | Prisma.Barbershop$bookingsArgs<ExtArgs>
@@ -1888,6 +2334,8 @@ export type BarbershopIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $BarbershopPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Barbershop"
   objects: {
+    freeTrials: Prisma.$BarbershopFreeTrialPayload<ExtArgs>[]
+    commercialEvents: Prisma.$BarbershopCommercialEventPayload<ExtArgs>[]
     administrativeChanges: Prisma.$BarbershopAdministrationChangePayload<ExtArgs>[]
     services: Prisma.$BarbershopServicePayload<ExtArgs>[]
     bookings: Prisma.$BookingPayload<ExtArgs>[]
@@ -1908,6 +2356,7 @@ export type $BarbershopPayload<ExtArgs extends runtime.Types.Extensions.Internal
     slug: string | null
     published: boolean
     suspended: boolean
+    approvalStatus: $Enums.BarbershopApprovalStatus
     phones: string[]
     timeZone: string | null
   }, ExtArgs["result"]["barbershop"]>
@@ -2304,6 +2753,8 @@ readonly fields: BarbershopFieldRefs;
  */
 export interface Prisma__BarbershopClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  freeTrials<T extends Prisma.Barbershop$freeTrialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Barbershop$freeTrialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopFreeTrialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  commercialEvents<T extends Prisma.Barbershop$commercialEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Barbershop$commercialEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopCommercialEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   administrativeChanges<T extends Prisma.Barbershop$administrativeChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Barbershop$administrativeChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopAdministrationChangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   services<T extends Prisma.Barbershop$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Barbershop$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarbershopServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookings<T extends Prisma.Barbershop$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Barbershop$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2351,6 +2802,7 @@ export interface BarbershopFieldRefs {
   readonly slug: Prisma.FieldRef<"Barbershop", 'String'>
   readonly published: Prisma.FieldRef<"Barbershop", 'Boolean'>
   readonly suspended: Prisma.FieldRef<"Barbershop", 'Boolean'>
+  readonly approvalStatus: Prisma.FieldRef<"Barbershop", 'BarbershopApprovalStatus'>
   readonly phones: Prisma.FieldRef<"Barbershop", 'String[]'>
   readonly timeZone: Prisma.FieldRef<"Barbershop", 'String'>
 }
@@ -2738,6 +3190,54 @@ export type BarbershopDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Barbershops to delete.
    */
   limit?: number
+}
+
+/**
+ * Barbershop.freeTrials
+ */
+export type Barbershop$freeTrialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopFreeTrial
+   */
+  select?: Prisma.BarbershopFreeTrialSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarbershopFreeTrial
+   */
+  omit?: Prisma.BarbershopFreeTrialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarbershopFreeTrialInclude<ExtArgs> | null
+  where?: Prisma.BarbershopFreeTrialWhereInput
+  orderBy?: Prisma.BarbershopFreeTrialOrderByWithRelationInput | Prisma.BarbershopFreeTrialOrderByWithRelationInput[]
+  cursor?: Prisma.BarbershopFreeTrialWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarbershopFreeTrialScalarFieldEnum | Prisma.BarbershopFreeTrialScalarFieldEnum[]
+}
+
+/**
+ * Barbershop.commercialEvents
+ */
+export type Barbershop$commercialEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopCommercialEvent
+   */
+  select?: Prisma.BarbershopCommercialEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarbershopCommercialEvent
+   */
+  omit?: Prisma.BarbershopCommercialEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarbershopCommercialEventInclude<ExtArgs> | null
+  where?: Prisma.BarbershopCommercialEventWhereInput
+  orderBy?: Prisma.BarbershopCommercialEventOrderByWithRelationInput | Prisma.BarbershopCommercialEventOrderByWithRelationInput[]
+  cursor?: Prisma.BarbershopCommercialEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarbershopCommercialEventScalarFieldEnum | Prisma.BarbershopCommercialEventScalarFieldEnum[]
 }
 
 /**

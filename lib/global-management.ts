@@ -30,11 +30,12 @@ export async function listManagedShops() {
       name: string;
       published: boolean;
       suspended: boolean;
+      approvalStatus: "PENDING" | "APPROVED" | "REJECTED";
       ownerName: string | null;
       ownerEmail: string | null;
       lastCompetence: string | null;
     }[]
-  >`SELECT b."id",b."name",b."published",b."suspended",u."name" AS "ownerName",u."email" AS "ownerEmail",
+  >`SELECT b."id",b."name",b."published",b."suspended",b."approvalStatus",u."name" AS "ownerName",u."email" AS "ownerEmail",
     (SELECT max(p."competence") FROM "ManualPixPayment" p WHERE p."barbershopId"=b."id") AS "lastCompetence"
     FROM "Barbershop" b LEFT JOIN "BarbershopMembership" m ON m."barbershopId"=b."id" AND m."role"='OWNER'
     LEFT JOIN "user" u ON u."id"=m."userId" ORDER BY b."name",b."id"`;

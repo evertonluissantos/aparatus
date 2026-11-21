@@ -23,6 +23,7 @@ function fixture({
   entities = {},
   assignments = [],
   suspendedShops = [],
+  unapprovedShops = [],
 } = {}) {
   const queries = [];
   let unavailable = false;
@@ -51,7 +52,8 @@ function fixture({
             sql.includes('FROM "Barbershop"') &&
             !sql.includes('FROM "BarbershopMembership"')
           )
-            return suspendedShops.includes(values[0])
+            return suspendedShops.includes(values[0]) ||
+              unapprovedShops.includes(values[0])
               ? []
               : [{ id: values[0] }];
           if (sql.includes('FROM "BarbershopMembership"'))
@@ -363,4 +365,19 @@ test("suspended shops refuse direct operational permissions without affecting an
   await denied(f.requireBarbershopPermission(shopA, "services:write"));
   const allowed = await f.requireBarbershopPermission(shopB, "services:write");
   assert.equal(allowed.barbershopId, shopB);
+});
+
+test("pending or rejected shop cannot bypass approval through direct operational permission checks", async () => {
+  const f = fixture({
+    memberships: [membership(shopA), membership(shopB)],
+    unapprovedShops: [shopA],
+  });
+  await denied(f.requireBarbershopPermission(shopA, "settings:write"));
+  assert.equal(
+    (await f.requireBarbershopPermission(shopB, "settings:write")).barbershopId,
+    shopB,
+  );
+  assert.ok(
+    f.queries.some((q) => q.sql.includes("\"approvalStatus\"='APPROVED'")),
+  );
 });
