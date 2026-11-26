@@ -23,8 +23,8 @@ const BarbershopItem = ({ barbershop, href }: BarbershopItemProps) => {
         className="rounded-xl object-cover"
       />
       <div className="absolute right-0 bottom-0 left-0 z-20 p-4">
-        <h3 className="text-background text-lg font-bold">{barbershop.name}</h3>
-        <p className="text-background text-xs">{barbershop.address}</p>
+        <h3 className="text-lg font-bold text-white">{barbershop.name}</h3>
+        <p className="text-xs text-white/80">{barbershop.address}</p>
       </div>
     </Link>
   );
